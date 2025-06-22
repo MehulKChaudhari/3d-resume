@@ -1,18 +1,20 @@
+import { SectionHeading } from './SectionHeading'
 import { resumeData } from '../data/resume'
 
 export function Education() {
   const { education } = resumeData
 
   return (
-    <section className="py-8">
-      <h2 className="text-3xl font-bold text-white mb-8">Education</h2>
-      <div>
-        <h3 className="text-xl font-semibold text-white mb-2">{education.degree}</h3>
-        <p className="text-gray-400">{education.institution}</p>
-        <p className="text-gray-500">{education.location}</p>
-        <div className="mt-2 text-sm text-gray-400">
+    <section>
+      <SectionHeading title="Education" />
+      
+      <div className="px-12 max-w-3xl">
+        <h3 className="text-3xl font-bold mb-3 text-white">{education.institution}</h3>
+        <p className="text-xl text-gray-400 mb-3 font-light">{education.degree}</p>
+        <p className="text-sm text-gray-500 mb-8 tracking-wider uppercase">{education.location}</p>
+        <div className="text-gray-300 font-light text-lg space-x-8">
           <span>GPA: {education.gpa}</span>
-          <span className="mx-2">•</span>
+          <span className="text-zinc-600">|</span>
           <span>CGPA: {education.cgpa}</span>
         </div>
       </div>

@@ -5,7 +5,8 @@ export const resumeData = {
     "phone": "+91-9527034551",
     "portfolio": "https://mehulkc.me",
     "github": "https://github.com/MehulKChaudhari",
-    "linkedin": "https://www.linkedin.com/in/mehulkchaudhari/"
+    "linkedin": "https://www.linkedin.com/in/mehulkchaudhari/",
+    "x": "https://x.com/mehulkchaudhari"
   },
   "work_experience": [
     {

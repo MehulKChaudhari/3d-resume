@@ -1,16 +1,20 @@
+import { SectionHeading } from './SectionHeading'
 import { resumeData } from '../data/resume'
 
 export function Skills() {
+  const { skills } = resumeData
+
   return (
-    <section className="py-8">
-      <h2 className="text-3xl font-bold text-white mb-8">Skills</h2>
-      <div className="flex flex-wrap gap-2">
-        {resumeData.skills.map((skill, index) => (
-          <span
-            key={index}
-            className="text-gray-400 text-sm"
+    <section>
+      <SectionHeading title="Skills" />
+      
+      <div className="flex flex-wrap gap-4 px-12 max-w-4xl">
+        {skills.map((skill, index) => (
+          <span 
+            key={index} 
+            className="px-6 py-3 bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/30 rounded-full text-gray-300 font-light hover:bg-zinc-700/50 transition-colors"
           >
-            {skill}{index !== resumeData.skills.length - 1 && " •"}
+            {skill}
           </span>
         ))}
       </div>

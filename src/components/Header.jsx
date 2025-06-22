@@ -1,63 +1,65 @@
-import { motion } from 'framer-motion'
+import { Canvas } from '@react-three/fiber'
+import { Suspense } from 'react'
+import { Scene } from './Scene'
 import { resumeData } from '../data/resume'
+import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa'
 
 export function Header() {
-  const { name, contact } = resumeData
+  const socialLinks = {
+    github: resumeData.contact.github,
+    x: resumeData.contact.x,
+    linkedin: resumeData.contact.linkedin
+  }
 
   return (
-    <div className="py-8">
-      <h1 className="text-6xl font-bold text-white mb-4">{name}</h1>
-      <p className="text-gray-400 text-lg mb-6">
-        Full Stack Developer passionate about creating elegant solutions to complex problems. 
-        Experienced in modern web technologies and cloud architecture.
-      </p>
-      
-      <div className="flex gap-6 text-sm">
-        <a 
-          href={`mailto:${contact.email}`}
-          className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-        >
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-          </svg>
-          {contact.email}
-        </a>
-        
-        <a 
-          href={contact.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-        >
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.11.793-.26.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.487 11.487 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-          </svg>
-          GitHub
-        </a>
-        
-        <a 
-          href={contact.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-        >
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/>
-          </svg>
-          LinkedIn
-        </a>
-        
-        <a 
-          href={contact.portfolio}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-        >
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
-          </svg>
-          Portfolio
-        </a>
+    <div className="w-full grid grid-cols-2 gap-12">
+      <div className="pl-12 flex flex-col justify-center">
+        <div className="h-40 mb-12">
+          <Canvas orthographic camera={{ position: [0, 0, 100], zoom: 45 }}>
+            <Suspense fallback={null}>
+              <Scene text={resumeData.name} />
+            </Suspense>
+          </Canvas>
+        </div>
+
+        <h2 className="text-xl font-light text-emerald-400/90 mb-6">
+          Software Engineer · Open Source Contributor · System Design · Framework Agnostic
+        </h2>
+
+        <p className="text-xl font-light text-gray-300 leading-relaxed mb-8">
+          Frontend-focused full stack developer. I work on clean, scalable systems 
+          and contribute to open source. I share what I learn on X and LinkedIn.
+        </p>
+
+        <div className="flex gap-6">
+          <a 
+            href={socialLinks.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-emerald-400 transition-colors"
+          >
+            <FaGithub className="w-7 h-7" />
+          </a>
+          <a 
+            href={socialLinks.x}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-emerald-400 transition-colors"
+          >
+            <FaTwitter className="w-7 h-7" />
+          </a>
+          <a 
+            href={socialLinks.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-emerald-400 transition-colors"
+          >
+            <FaLinkedin className="w-7 h-7" />
+          </a>
+        </div>
+      </div>
+      <div className="h-[500px] bg-zinc-800/30 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-zinc-800/50">
+        <p className="text-gray-400 font-light">3D Model Coming Soon</p>
       </div>
     </div>
   )
