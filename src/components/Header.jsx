@@ -4,6 +4,8 @@ import { Scene } from './Scene'
 import { OrbitControls } from '@react-three/drei'
 import { resumeData } from '../data/resume'
 import { FaGithub, FaTwitter, FaLinkedin, FaFileAlt } from 'react-icons/fa'
+import { Car } from './Car'
+import { ErrorBoundary } from './ErrorBoundary'
 
 export function Header() {
   const socialLinks = {
@@ -30,20 +32,22 @@ export function Header() {
       <div className="w-full grid grid-cols-2 gap-12">
         <div className="pl-12 flex flex-col justify-center">
           <div className="h-40 mb-12">
-            <Canvas orthographic camera={{ position: [0, 0, 100], zoom: 35 }}>
-              <Suspense fallback={null}>
-                <Scene text={resumeData.name} />
-              </Suspense>
-              <OrbitControls
-                enableZoom={false}
-                enablePan={false}
-                enableRotate={true}
-                minPolarAngle={Math.PI / 3}
-                maxPolarAngle={Math.PI / 1.5}
-                minAzimuthAngle={-Math.PI / 4}
-                maxAzimuthAngle={Math.PI / 4}
-              />
-            </Canvas>
+            <ErrorBoundary>
+              <Canvas orthographic camera={{ position: [0, 0, 100], zoom: 35 }}>
+                <Suspense fallback={null}>
+                  <Scene text={resumeData.name} />
+                </Suspense>
+                <OrbitControls
+                  enableZoom={false}
+                  enablePan={false}
+                  enableRotate={true}
+                  minPolarAngle={Math.PI / 3}
+                  maxPolarAngle={Math.PI / 1.5}
+                  minAzimuthAngle={-Math.PI / 4}
+                  maxAzimuthAngle={Math.PI / 4}
+                />
+              </Canvas>
+            </ErrorBoundary>
           </div>
 
           <h2 className="text-xl font-light text-emerald-400/90 mb-6">
@@ -82,8 +86,28 @@ export function Header() {
             </a>
           </div>
         </div>
-        <div className="h-[500px] bg-zinc-800/30 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-zinc-800/50">
-          <p className="text-gray-400 font-light">3D Model Coming Soon</p>
+
+        <div className="h-[500px]">
+          <ErrorBoundary>
+            <div className="w-full h-full bg-zinc-800/30 rounded-2xl overflow-hidden backdrop-blur-sm border border-zinc-800/50">
+              <Canvas shadows camera={{ position: [5, 0, 15], fov: 30 }}>
+                <Suspense fallback={
+                  <mesh>
+                    <boxGeometry args={[1, 1, 1]} />
+                    <meshStandardMaterial color="#22c55e" />
+                  </mesh>
+                }>
+                  <Car />
+                </Suspense>
+                <OrbitControls
+                  enableZoom={false}
+                  enablePan={false}
+                  minPolarAngle={Math.PI / 3}
+                  maxPolarAngle={Math.PI / 1.5}
+                />
+              </Canvas>
+            </div>
+          </ErrorBoundary>
         </div>
       </div>
     </>
