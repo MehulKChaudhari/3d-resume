@@ -8,13 +8,13 @@ export function Education() {
     <section>
       <SectionHeading title="Education" />
       
-      <div className="px-12 max-w-3xl">
-        <h3 className="text-3xl font-bold mb-3 text-white">{education.institution}</h3>
-        <p className="text-xl text-gray-400 mb-3 font-light">{education.degree}</p>
-        <p className="text-sm text-gray-500 mb-8 tracking-wider uppercase">{education.location}</p>
-        <div className="text-gray-300 font-light text-lg space-x-8">
+      <div className="px-4 sm:px-8 lg:px-16 max-w-4xl">
+        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 lg:mb-4 bg-gradient-to-r from-[#fce7fa] via-[#c8b6e2] to-[#fce7fa] bg-clip-text text-transparent tracking-wide">{education.institution}</h3>
+        <p className="text-xl sm:text-xl lg:text-2xl text-[#e4e4e7] mb-3 font-light tracking-wide">{education.degree}</p>
+        <p className="text-sm text-[#a1a1aa] mb-8 lg:mb-10 tracking-wider uppercase">{education.location}</p>
+        <div className="text-[#e4e4e7] font-light text-base sm:text-lg lg:text-xl space-x-6 sm:space-x-8 lg:space-x-10 tracking-wide">
           <span>GPA: {education.gpa}</span>
-          <span className="text-zinc-600">|</span>
+          <span className="text-[#fce7fa]/30">|</span>
           <span>CGPA: {education.cgpa}</span>
         </div>
       </div>
