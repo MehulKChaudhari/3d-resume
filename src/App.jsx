@@ -28,16 +28,17 @@ function StarBackground() {
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-900/90 to-zinc-950/90 text-white relative">
-      <div className="fixed inset-0 -z-10">
+    <div className="min-h-screen bg-gradient-to-b from-zinc-900/80 via-[#1a1a24]/75 to-black/70 text-white relative">
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_120%,rgba(252,231,250,0.03),transparent_75%)] backdrop-blur-[1px]">
+        <div className="absolute inset-0 bg-black/20" />
         <StarBackground />
       </div>
       <div className="relative z-10">
-        <div className="max-w-6xl mx-auto px-8">
-          <div className="min-h-screen flex items-center">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+          <div className="min-h-[90vh] flex items-center">
             <Header />
           </div>
-          <div className="max-w-4xl mx-auto space-y-40 pb-40">
+          <div className="max-w-5xl mx-auto space-y-32 lg:space-y-48 pb-32 lg:pb-48">
             <WorkExperience />
             <Skills />
             <Education />
