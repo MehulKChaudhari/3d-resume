@@ -15,25 +15,25 @@ export function Scene({ text = "3D Text" }) {
         intensity={1.2}
       />
       
-      <Center rotation={[0, 0, 0]} position={[0, 0, 0]}>
+      <Center rotation={[-0.3, -0.15, 0]} position={[0, -0.5, 0]}>
         <Text3D
           font="/fonts/helvetiker_regular.typeface.json"
-          size={1.8}
-          height={0.1}
+          size={1}
+          height={0.15}
           curveSegments={32}
           bevelEnabled
-          bevelSize={0.01}
-          bevelThickness={0.02}
+          bevelSize={0.02}
+          bevelThickness={0.04}
           bevelOffset={0}
           bevelSegments={5}
         >
           {text}
           <meshStandardMaterial 
             color="#22c55e"
-            metalness={0.2}
+            metalness={0.3}
             roughness={0.1}
             emissive="#22c55e"
-            emissiveIntensity={0.6}
+            emissiveIntensity={0.8}
           />
         </Text3D>
       </Center>
