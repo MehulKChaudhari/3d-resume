@@ -3,9 +3,9 @@ import { Suspense } from 'react'
 import { Scene } from './Scene'
 import { OrbitControls } from '@react-three/drei'
 import { resumeData } from '../data/resume'
-import { FaGithub, FaTwitter, FaLinkedin, FaFileAlt } from 'react-icons/fa'
+import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa'
 import { ErrorBoundary } from './ErrorBoundary'
-import { Scene3D } from './Scene3D'
+import { PorscheCar } from './PorscheCar'
 
 export function Header() {
   const socialLinks = {
@@ -48,43 +48,36 @@ export function Header() {
               and contribute to open source. I share what I learn on X and LinkedIn.
             </p>
 
-            <div className="flex items-center gap-10 pt-2">
-              <div className="flex gap-8 lg:gap-10">
+            <div className="flex items-center gap-6 pt-2">
+              <div className="flex gap-6 lg:gap-8">
                 <a 
                   href={socialLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#fce7fa]/50 hover:text-[#fce7fa] transition-all duration-300 transform hover:scale-110"
+                  className="text-[#fce7fa]/50 hover:text-[#fce7fa] transition-all duration-300 relative group"
                 >
                   <FaGithub className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
+                  <div className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-[#fce7fa]/0 via-[#fce7fa]/50 to-[#fce7fa]/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                 </a>
                 <a 
                   href={socialLinks.x}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#fce7fa]/50 hover:text-[#fce7fa] transition-all duration-300 transform hover:scale-110"
+                  className="text-[#fce7fa]/50 hover:text-[#fce7fa] transition-all duration-300 relative group"
                 >
                   <FaTwitter className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
+                  <div className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-[#fce7fa]/0 via-[#fce7fa]/50 to-[#fce7fa]/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                 </a>
                 <a 
                   href={socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#fce7fa]/50 hover:text-[#fce7fa] transition-all duration-300 transform hover:scale-110"
+                  className="text-[#fce7fa]/50 hover:text-[#fce7fa] transition-all duration-300 relative group"
                 >
                   <FaLinkedin className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
+                  <div className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-[#fce7fa]/0 via-[#fce7fa]/50 to-[#fce7fa]/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                 </a>
               </div>
-              
-              <a 
-                href={socialLinks.resume}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 md:px-7 py-2.5 md:py-3 bg-gradient-to-r from-[#fce7fa]/10 to-[#2d2d3d]/40 hover:from-[#fce7fa]/15 hover:to-[#2d2d3d]/50 text-[#fce7fa] rounded-lg transition-all duration-300 border border-[#fce7fa]/10 backdrop-blur-sm shadow-lg"
-              >
-                <FaFileAlt className="w-4 h-4 md:w-5 md:h-5" />
-                <span className="font-medium tracking-wider text-sm md:text-base">Resume</span>
-              </a>
             </div>
           </div>
         </div>
@@ -99,7 +92,7 @@ export function Header() {
                     <meshStandardMaterial color="#22c55e" />
                   </mesh>
                 }>
-                  <Scene3D />
+                  <PorscheCar />
                 </Suspense>
               </Canvas>
             </div>

@@ -58,7 +58,7 @@ function Lightformers({ positions = [2, 0, 2, 0, 2, 0, 2, 0] }) {
   )
 }
 
-export function Scene3D() {
+export function PorscheCar() {
   const [degraded, degrade] = useState(false)
   
   return (
