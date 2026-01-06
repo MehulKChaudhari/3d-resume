@@ -17,21 +17,25 @@ export function StatsBar() {
       label: 'Years in production',
       value: formatYearsSince(2021),
       hint: 'Shipping software used by real users',
+      gradient: 'from-sky-700 via-sky-600 to-sky-700 dark:from-sky-400 dark:via-sky-300 dark:to-sky-400',
     },
     {
       label: 'Open source PRs',
       value: isLoading ? '—' : totalPRs,
       hint: isLoading ? 'Fetching GitHub data' : `${mergedPRs} merged`,
+      gradient: 'from-violet-700 via-fuchsia-600 to-violet-700 dark:from-violet-400 dark:via-fuchsia-300 dark:to-violet-400',
     },
     {
       label: 'Systems owned',
       value: '3+',
       hint: 'Feature areas & services I was responsible for',
+      gradient: 'from-emerald-700 via-teal-600 to-emerald-700 dark:from-emerald-400 dark:via-teal-300 dark:to-emerald-400',
     },
     {
       label: 'Talks & sessions',
       value: '1',
       hint: 'Starting to share more in public',
+      gradient: 'from-rose-700 via-orange-600 to-rose-700 dark:from-rose-400 dark:via-orange-300 dark:to-rose-400',
     },
   ]
 
@@ -56,7 +60,9 @@ export function StatsBar() {
             key={item.label}
             className="relative overflow-hidden rounded-2xl border border-border/80 bg-surface/95 px-4 py-3 transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg"
           >
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-sky-500 via-teal-400 to-indigo-500 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400" />
+            <div
+              className={`pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r ${item.gradient}`}
+            />
             <p className="text-xs text-text-subtle mb-1">{item.label}</p>
             <p className="text-xl font-semibold text-text mb-1">{item.value}</p>
             <p className="text-xs text-text-subtle">{item.hint}</p>

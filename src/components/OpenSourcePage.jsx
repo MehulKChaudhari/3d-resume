@@ -10,8 +10,15 @@ export function OpenSourcePage() {
       <main className="min-h-screen py-24">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="mb-16">
-            <h1 className="text-4xl sm:text-5xl font-display font-light text-text mb-2">Open Source</h1>
-            <p className="text-sm text-text-subtle">Contributions to open source projects</p>
+            <h1 className="text-4xl sm:text-5xl font-display font-light text-text mb-2">
+              Open{' '}
+              <span className="font-calligraphic font-bold bg-gradient-to-r from-sky-600 via-teal-500 to-indigo-600 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent">
+                Source
+              </span>
+            </h1>
+            <p className="text-sm text-text-subtle">
+              Contributions to open source projects
+            </p>
           </div>
           <div className="text-text-muted">
             Error loading contributions: {error}
@@ -25,8 +32,15 @@ export function OpenSourcePage() {
     <main className="min-h-screen py-24">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="mb-16">
-          <h1 className="text-4xl sm:text-5xl font-display font-light text-text mb-2">Open Source</h1>
-          <p className="text-sm text-text-subtle">Contributions to open source projects</p>
+          <h1 className="text-4xl sm:text-5xl font-display font-black text-text mb-2">
+            Open{' '}
+            <span className="font-calligraphic font-black bg-gradient-to-r from-sky-600 via-teal-500 to-indigo-600 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent">
+              Source
+            </span>
+          </h1>
+          <p className="text-sm text-text-subtle">
+            Contributions to open source projects
+          </p>
         </div>
 
         {isLoading ? (
@@ -81,7 +95,7 @@ export function OpenSourcePage() {
                         year: 'numeric'
                       })}
                     </span>
-                    <span className="text-xs text-accent group-hover:text-accent-hover transition-colors flex items-center gap-1 font-medium">
+                    <span className="text-xs link group-hover:text-accent-hover transition-colors flex items-center gap-1 font-medium">
                       View PR
                       <FaExternalLinkAlt className="w-3 h-3" />
                     </span>

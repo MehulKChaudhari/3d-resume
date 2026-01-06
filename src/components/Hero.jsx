@@ -16,7 +16,7 @@ export function Hero() {
     <section className="min-h-[85vh] flex items-center py-16">
       <div className="w-full grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
         <div className="space-y-8">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
             <div className="relative h-16 w-16 rounded-full bg-[#12333a] shadow-md flex items-center justify-center overflow-hidden">
               <div className="absolute inset-[3px] rounded-full overflow-hidden">
                 <img
@@ -35,12 +35,15 @@ export function Hero() {
           </div>
 
           <div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-light tracking-tight text-text mb-4">
-              Building systems that{' '}
-              <span className="font-calligraphic text-6xl sm:text-7xl lg:text-8xl bg-gradient-to-r from-sky-600 via-teal-500 to-indigo-600 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent drop-shadow-sm">
-                age well
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-light tracking-tight text-text mb-4 leading-tight">
+              <span className="block">Building systems</span>
+              <span className="block">
+                that{' '}
+                <span className="font-calligraphic text-5xl sm:text-6xl lg:text-7xl bg-gradient-to-r from-sky-600 via-teal-500 to-indigo-600 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent drop-shadow-sm">
+                  age well
+                </span>
+                .
               </span>
-              .
             </h1>
             <p className="text-lg sm:text-xl text-text-muted font-light leading-relaxed max-w-xl">
               I work at the intersection of frontend, backend, and product — designing APIs,
@@ -82,8 +85,8 @@ export function Hero() {
           {/* Recent open source moved to dedicated section below hero */}
         </div>
 
-        <div className="h-[360px] sm:h-[420px] lg:h-[460px]">
-          <div className="h-full w-full rounded-2xl border border-border bg-surface shadow-sm p-6 flex flex-col justify-between">
+        <div className="w-full">
+          <div className="w-full rounded-2xl border border-border bg-surface shadow-sm p-6 flex flex-col gap-4">
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2.5 w-2.5">

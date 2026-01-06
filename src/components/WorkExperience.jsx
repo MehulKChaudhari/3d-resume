@@ -12,8 +12,8 @@ export function WorkExperience() {
           </span>
           <span>Day-to-day work that shaped my judgment</span>
         </div>
-        <h2 className="mt-4 text-3xl sm:text-4xl font-display font-light text-text mb-2">
-          <span className="font-calligraphic font-bold bg-gradient-to-r from-sky-500 via-teal-400 to-indigo-500 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent">
+        <h2 className="mt-4 text-3xl sm:text-4xl font-display font-black text-text mb-2">
+          <span className="font-calligraphic font-black bg-gradient-to-r from-sky-500 via-teal-400 to-indigo-500 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent">
             Experience
           </span>
         </h2>

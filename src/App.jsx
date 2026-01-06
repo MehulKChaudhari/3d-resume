@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
 import { HomePage } from './components/HomePage'
 import { ProjectsPage } from './components/ProjectsPage'
+import { TalksPage } from './components/TalksPage'
 import { OpenSourcePage } from './components/OpenSourcePage'
 import { GithubProvider } from './context/GithubContext'
 import { ThemeProvider } from './context/ThemeContext'
@@ -18,6 +19,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/open-source" element={<OpenSourcePage />} />
+              <Route path="/talks" element={<TalksPage />} />
             </Routes>
           </div>
         </GithubProvider>

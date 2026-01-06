@@ -27,7 +27,7 @@ export function ProjectsSection() {
         </div>
         <Link 
           to="/projects"
-          className="text-sm text-accent hover:text-accent-hover transition-colors flex items-center gap-1 font-medium"
+          className="link text-sm hover:text-accent-hover transition-colors flex items-center gap-1 font-medium"
         >
           View all
           <span>→</span>
