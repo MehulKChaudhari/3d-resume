@@ -52,12 +52,13 @@ export function Navbar() {
             to="/"
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-text hover:text-accent transition-colors"
           >
-            <div className="relative inline-flex h-8 w-8 sm:h-9 sm:w-9 avatar-shell">
-              <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a] z-10">
+            <div className="relative inline-flex h-8 w-8 sm:h-9 sm:w-9 avatar-shell" data-navbar-avatar>
+              <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a] z-10" style={{ aspectRatio: '1 / 1' }}>
                 <img
                   src="/assets/portfolio-site-image.jpeg"
                   alt={`${resumeData.name} - Software Engineer`}
-                  className="h-full w-full object-cover rounded-full"
+                  className="h-full w-full object-cover"
+                  style={{ aspectRatio: '1 / 1', borderRadius: '50%' }}
                 />
                 <div className="pointer-events-none absolute inset-0">
                   <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />
@@ -133,12 +134,13 @@ export function Navbar() {
             className="inline-flex items-center gap-2 text-xs font-medium text-text hover:text-accent transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="relative inline-flex h-8 w-8 avatar-shell">
-              <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a] z-10">
+            <div className="relative inline-flex h-8 w-8 avatar-shell" data-navbar-avatar>
+              <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a] z-10" style={{ aspectRatio: '1 / 1' }}>
                 <img
                   src="/assets/portfolio-site-image.jpeg"
                   alt={`${resumeData.name} - Software Engineer`}
-                  className="h-full w-full object-cover rounded-full"
+                  className="h-full w-full object-cover"
+                  style={{ aspectRatio: '1 / 1', borderRadius: '50%' }}
                 />
                 <div className="pointer-events-none absolute inset-0">
                   <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />

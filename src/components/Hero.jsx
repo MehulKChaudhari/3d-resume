@@ -1,8 +1,79 @@
+import { useRef, useEffect, useState } from 'react'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { resumeData } from '../data/resume'
 import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa'
 import { AvatarWaveAnimation } from './AvatarWaveAnimation'
 
 export function Hero() {
+  const heroRef = useRef(null)
+  const avatarRef = useRef(null)
+  const [navbarPosition, setNavbarPosition] = useState({ x: 0, y: 0, size: 36 })
+  
+  // Get navbar avatar position
+  useEffect(() => {
+    const updateNavbarPosition = () => {
+      const navbarAvatar = document.querySelector('[data-navbar-avatar]')
+      if (navbarAvatar && avatarRef.current) {
+        const navbarRect = navbarAvatar.getBoundingClientRect()
+        const heroRect = avatarRef.current.getBoundingClientRect()
+        
+        setNavbarPosition({
+          x: navbarRect.left - heroRect.left,
+          y: navbarRect.top - heroRect.top,
+          size: navbarRect.width,
+        })
+      }
+    }
+    
+    updateNavbarPosition()
+    window.addEventListener('resize', updateNavbarPosition)
+    window.addEventListener('scroll', updateNavbarPosition)
+    
+    return () => {
+      window.removeEventListener('resize', updateNavbarPosition)
+      window.removeEventListener('scroll', updateNavbarPosition)
+    }
+  }, [])
+  
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  })
+
+  // Smooth spring animation for scroll - more subtle
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 35,
+    restDelta: 0.001,
+  })
+  
+  // Clamp progress to make animation more subtle (only animate 60% of scroll)
+  const clampedProgress = useTransform(smoothProgress, (value) => Math.min(value * 1.2, 1))
+
+  // Hero avatar size - calculate dynamically
+  const heroSizeRef = useRef(96)
+  useEffect(() => {
+    if (avatarRef.current) {
+      heroSizeRef.current = avatarRef.current.offsetWidth
+    }
+  }, [])
+  
+  const scale = useTransform(
+    clampedProgress,
+    [0, 1],
+    [1, navbarPosition.size > 0 && heroSizeRef.current > 0 ? navbarPosition.size / heroSizeRef.current : 0.375]
+  )
+  
+  // Calculate position transform - more subtle movement
+  const x = useTransform(clampedProgress, [0, 1], [0, navbarPosition.x])
+  const y = useTransform(clampedProgress, [0, 1], [0, navbarPosition.y])
+  
+  // Opacity: very subtle fade
+  const opacity = useTransform(clampedProgress, [0, 0.8, 1], [1, 0.99, 0.97])
+  
+  // Z-index: bring to front as it moves
+  const zIndex = useTransform(clampedProgress, [0, 0.2, 1], [10, 50, 1000])
+
   const socialLinks = {
     github: resumeData.contact.github,
     x: resumeData.contact.x,
@@ -10,23 +81,35 @@ export function Hero() {
   }
 
   return (
-    <section className="min-h-[85vh] flex items-center py-16" aria-label="Hero section">
+    <section ref={heroRef} className="min-h-[85vh] flex items-center py-16" aria-label="Hero section">
       <div className="w-full grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
         <div className="space-y-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-            <div className="relative inline-flex h-20 w-20 sm:h-24 sm:w-24 avatar-shell">
-              <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a] shadow-md z-10">
+            <motion.div
+              ref={avatarRef}
+              className="relative inline-flex h-20 w-20 sm:h-24 sm:w-24 avatar-shell"
+              style={{
+                scale,
+                x,
+                y,
+                opacity,
+                zIndex,
+                position: 'relative',
+              }}
+            >
+              <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a] shadow-md z-10" style={{ aspectRatio: '1 / 1' }}>
                 <img
                   src="/assets/portfolio-site-image.jpeg"
                   alt={`${resumeData.name} - Software Engineer`}
-                  className="h-full w-full object-cover rounded-full"
+                  className="h-full w-full object-cover"
+                  style={{ aspectRatio: '1 / 1', borderRadius: '50%' }}
                 />
                 <div className="pointer-events-none absolute inset-0">
                   <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />
                 </div>
               </div>
               <AvatarWaveAnimation gradientIdPrefix="hero-wave" />
-            </div>
+            </motion.div>
             <p className="text-xs font-medium tracking-[0.18em] uppercase text-text-subtle">
               Software engineer • Full stack • Open source • Business-aware
             </p>
