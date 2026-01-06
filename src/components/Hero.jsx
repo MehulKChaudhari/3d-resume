@@ -1,6 +1,5 @@
 import { resumeData } from '../data/resume'
-import { FaGithub, FaTwitter, FaLinkedin, FaGithubAlt } from 'react-icons/fa'
-import { useGithub } from '../context/GithubContext'
+import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa'
 
 export function Hero() {
   const socialLinks = {
@@ -9,24 +8,23 @@ export function Hero() {
     linkedin: resumeData.contact.linkedin,
   }
 
-  const { contributions, isLoading } = useGithub()
-  const topContributions = contributions.slice(0, 3)
-
   return (
-    <section className="min-h-[85vh] flex items-center py-16">
+    <section className="min-h-[85vh] flex items-center py-16" aria-label="Hero section">
       <div className="w-full grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
         <div className="space-y-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-            <div className="relative h-16 w-16 rounded-full bg-[#12333a] shadow-md flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-[3px] rounded-full overflow-hidden">
-                <img
-                  src="/avatar.jpg"
-                  alt={resumeData.name}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />
+            <div className="relative inline-flex h-20 w-20 sm:h-24 sm:w-24">
+              <div className="avatar-wave-border h-full w-full">
+                <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a] shadow-md">
+                  <img
+                    src="/assets/portfolio-site-image.jpeg"
+                    alt={`${resumeData.name} - Software Engineer`}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="pointer-events-none absolute inset-0">
+                    <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />
+                  </div>
+                </div>
               </div>
             </div>
             <p className="text-xs font-medium tracking-[0.18em] uppercase text-text-subtle">
@@ -86,8 +84,8 @@ export function Hero() {
         </div>
 
         <div className="w-full">
-          <div className="w-full rounded-2xl border border-border bg-surface shadow-sm p-6 flex flex-col gap-4">
-            <div className="space-y-3">
+          <div className="w-full rounded-2xl border border-border bg-surface shadow-sm p-8 lg:p-10 flex flex-col gap-8 lg:gap-10 min-h-[460px] lg:min-h-[520px]">
+            <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400/70 dark:bg-emerald-400 opacity-75 animate-ping" />
@@ -98,33 +96,33 @@ export function Hero() {
                 </p>
               </div>
               <div>
-                <p className="text-sm text-text-subtle mb-1">SDE · YUDEK</p>
-                <p className="text-base text-text-muted">
+                <p className="text-sm text-text-subtle mb-2">SDE · YUDEK</p>
+                <p className="text-base lg:text-lg text-text-muted leading-relaxed">
                   Owning parts of a browser-first knowledge system — from Ember frontends to
                   TypeScript services and Firestore data models.
                 </p>
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               <p className="text-xs font-semibold tracking-[0.18em] uppercase text-text-subtle">
                 I care about
               </p>
-              <ul className="space-y-2 text-sm text-text-muted">
+              <ul className="space-y-3 text-sm lg:text-base text-text-muted leading-relaxed">
                 <li>• Interfaces that feel obvious on first use, not just demo-ready.</li>
                 <li>• Systems that can be debugged at 3am without guessing.</li>
                 <li>• Shipping work that moves business metrics, not just tickets.</li>
               </ul>
             </div>
 
-            <div className="flex flex-wrap gap-2 pt-4 border-t border-border text-xs text-text-subtle">
-              <span className="rounded-full border border-border px-3 py-1">
+            <div className="flex flex-wrap gap-2 pt-6 border-t border-border text-xs text-text-subtle mt-auto">
+              <span className="rounded-full border border-border px-3 py-1.5">
                 Full‑stack JS/TS
               </span>
-              <span className="rounded-full border border-border px-3 py-1">
+              <span className="rounded-full border border-border px-3 py-1.5">
                 System design
               </span>
-              <span className="rounded-full border border-border px-3 py-1">
+              <span className="rounded-full border border-border px-3 py-1.5">
                 DX & docs
               </span>
             </div>

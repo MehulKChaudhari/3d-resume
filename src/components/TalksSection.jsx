@@ -1,4 +1,5 @@
 import { talks } from '../data/talks'
+import { FaExternalLinkAlt } from 'react-icons/fa'
 
 export function TalksSection() {
   const featured = talks[0]
@@ -40,18 +41,20 @@ export function TalksSection() {
                 href="https://emberfest.mehul.wiki/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="link hover:text-accent-hover"
+                className="link hover:text-accent-hover inline-flex items-center gap-1.5"
               >
                 Slides
+                <FaExternalLinkAlt className="w-3 h-3 text-orange-500 dark:text-orange-400" />
               </a>
               {featured.link && (
                 <a
                   href={featured.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="link hover:text-accent-hover"
+                  className="link hover:text-accent-hover inline-flex items-center gap-1.5"
                 >
                   YouTube
+                  <FaExternalLinkAlt className="w-3 h-3 text-orange-500 dark:text-orange-400" />
                 </a>
               )}
             </div>

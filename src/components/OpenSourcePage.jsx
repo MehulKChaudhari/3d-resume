@@ -32,7 +32,7 @@ export function OpenSourcePage() {
     <main className="min-h-screen py-24">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="mb-16">
-          <h1 className="text-4xl sm:text-5xl font-display font-black text-text mb-2">
+          <h1 className="text-4xl sm:text-5xl font-display font-semibold text-text mb-2">
             Open{' '}
             <span className="font-calligraphic font-black bg-gradient-to-r from-sky-600 via-teal-500 to-indigo-600 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent">
               Source
@@ -97,7 +97,7 @@ export function OpenSourcePage() {
                     </span>
                     <span className="text-xs link group-hover:text-accent-hover transition-colors flex items-center gap-1 font-medium">
                       View PR
-                      <FaExternalLinkAlt className="w-3 h-3" />
+                      <FaExternalLinkAlt className="w-3 h-3 text-orange-500 dark:text-orange-400" />
                     </span>
                   </div>
                 </div>

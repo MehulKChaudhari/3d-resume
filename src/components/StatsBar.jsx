@@ -1,5 +1,4 @@
 import { useGithub } from '../context/GithubContext'
-import { FaSpotify } from 'react-icons/fa'
 
 function formatYearsSince(startYear) {
   const now = new Date()
@@ -70,20 +69,6 @@ export function StatsBar() {
         ))}
       </div>
 
-      <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-xl border border-border bg-surface px-4 py-3">
-        <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1DB954] text-white">
-            <FaSpotify className="h-4 w-4" />
-          </div>
-          <div>
-            <p className="text-xs font-semibold tracking-[0.18em] uppercase text-text-subtle">Now Playing</p>
-            <p className="text-sm text-text-muted">Not playing — Spotify</p>
-          </div>
-        </div>
-        <div className="text-xs text-text-subtle">
-          Built to plug into a private now-playing endpoint when needed.
-        </div>
-      </div>
     </section>
   )
 }

@@ -12,7 +12,7 @@ export function OpenSourceSection() {
     <section>
       <div className="flex items-end justify-between mb-12">
         <div>
-          <h2 className="text-3xl sm:text-4xl font-display font-black text-text mb-2">
+          <h2 className="text-3xl sm:text-4xl font-display font-semibold text-text mb-2">
             Open{' '}
             <span className="font-calligraphic font-black bg-gradient-to-r from-sky-500 via-teal-400 to-indigo-500 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent">
               Source
@@ -81,7 +81,7 @@ export function OpenSourceSection() {
                 </span>
                 <span className="text-xs link group-hover:text-accent-hover transition-colors flex items-center gap-1 font-medium">
                   View PR
-                  <FaExternalLinkAlt className="w-3 h-3" />
+                  <FaExternalLinkAlt className="w-3 h-3 text-orange-500 dark:text-orange-400" />
                 </span>
               </div>
             </div>
