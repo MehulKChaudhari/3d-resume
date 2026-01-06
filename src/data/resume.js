@@ -10,9 +10,9 @@ export const resumeData = {
   },
   "work_experience": [
     {
-      "title": "SDE",
+      "title": "Software Development Engineer (SDE)",
       "company": "YUDEK. Inc",
-      "duration": "2022/08 – present",
+      "duration": "2022 - present",
       "points": [
         "Developing a comprehensive web application and browser extension for YUDEK, enabling seamless access, organization, and sharing of links, PDFs, and other essential files.",
         "Delivered key features end to end, including Public and Private Item Sharing: Enabled users to share public items via links, while keeping private items secure.",
@@ -20,21 +20,24 @@ export const resumeData = {
         "Utilized Ember.js, ember-data, Node.js, and Firestore for front-end and back-end development, utilizing TypeScript in both to detect and resolve bugs early, achieving a 90% bug resolution rate and ensuring production stability.",
         "Formulated acceptance, integration, and unit tests across codebases, achieving over 75% test coverage.",
         "Addressed all user feedback, resolving 100% of reported issues and significantly enhancing the user experience."
-      ]
+      ],
+      "tech_stack": ["Ember.js", "TypeScript", "Node.js", "Firestore", "AWS", "Cloudinary", "Jest", "Browser Extension APIs", "System Design", "Test-Driven Development", "Production Systems"]
     },
     {
-      "title": "Freelance frontend engineer (NDA)",
+      "title": "Frontend Engineer",
+      "company": "Freelance (NDA)",
       "points": [
         "Contributed to and enhanced multiple micro-frontends for a large-scale web application with over 50 dynamic form pages using React, Redux, SCSS, Mantine, and Vitest.",
         "Improved frontend performance by applying memoisation strategies (useMemo, useCallback) and optimising state management to reduce unnecessary re-renders.",
         "Developed complex, dynamic forms with custom inputs and implemented robust client-side validation and error handling to enhance UX and prevent user errors.",
         "Led accessibility improvements by implementing semantic HTML, keyboard navigation, and ARIA roles, achieving 95% tabbing coverage and aligning with WCAG standards."
-      ]
+      ],
+      "tech_stack": ["React", "Redux", "TypeScript", "SCSS", "Mantine", "Vitest", "Micro-frontends", "Performance Optimization"]
     },
     {
       "title": "SDE Intern",
       "company": "NeoG Camp, Kanak Krea(OPC) Pvt Ltd",
-      "duration": "2021/06 – 2021/11",
+      "duration": "June 2021 – November 2021",
       "points": [
         "Built a custom admissions portal for NeoG Camp using Next.js (React), improving the user experience for 5,000+ students annually.",
         "Designed and integrated an animated admission ticket UI that appears upon project acceptance, enabling users to share achievements on X (formerly Twitter) and boost engagement.",
@@ -42,7 +45,8 @@ export const resumeData = {
         "Leveraged Chakra UI and optimized component rendering, reducing UI load times and enhancing visual consistency.",
         "Performed peer code reviews and wrote tests to maintain code quality and catch bugs early in the development cycle.",
         "Utilized TypeScript throughout the codebase, achieving a 90% bug resolution rate and contributing to production stability."
-      ]
+      ],
+      "tech_stack": ["Next.js", "React", "TypeScript", "Chakra UI", "MongoDB", "Product Engineering", "Code Reviews", "Testing"]
     }
   ],
   "skills": [

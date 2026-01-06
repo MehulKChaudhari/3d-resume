@@ -129,7 +129,7 @@ export function Navbar() {
 
           <button
             onClick={toggleTheme}
-            className="relative p-2.5 rounded-xl transition-all duration-300 ease-out group overflow-hidden"
+            className="relative p-2.5 rounded-xl transition-all duration-300 ease-out group overflow-hidden cursor-pointer hover:scale-105 active:scale-95"
             aria-label="Toggle theme"
             style={{
               background: theme === 'dark'
@@ -221,7 +221,7 @@ export function Navbar() {
                 toggleTheme()
                 setMobileMenuOpen(false)
               }}
-              className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-text-subtle hover:text-text hover:bg-surface transition-colors"
+              className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-text-subtle hover:text-text hover:bg-surface transition-colors cursor-pointer"
               aria-label="Toggle theme"
             >
               <span>Theme</span>
