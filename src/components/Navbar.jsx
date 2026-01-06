@@ -72,14 +72,24 @@ export function Navbar() {
           <div className="flex-1 flex justify-center">
             <div
               ref={containerRef}
-              className="relative inline-flex items-center gap-1 sm:gap-2 rounded-full border border-border bg-bg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm shadow-sm max-w-full"
+              className="relative inline-flex items-center gap-1 sm:gap-2 rounded-full border border-border bg-bg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm shadow-sm max-w-full overflow-visible"
             >
               {indicator.visible && (
                 <div
-                  className="pointer-events-none absolute top-1/2 -translate-y-1/2 h-9 sm:h-10 rounded-full bg-white/65 dark:bg-white/12 border border-white/80 dark:border-white/20 backdrop-blur-md shadow-[0_10px_30px_rgba(15,23,42,0.18)] transition-all duration-400 ease-out"
+                  className="pointer-events-none absolute top-1/2 -translate-y-1/2 h-9 sm:h-10 rounded-full transition-all duration-500 ease-out"
                   style={{
                     left: indicator.left,
                     width: indicator.width,
+                    background: theme === 'dark' 
+                      ? 'radial-gradient(circle at center, rgba(148, 163, 184, 0.18) 0%, rgba(100, 116, 139, 0.12) 50%, rgba(71, 85, 105, 0.08) 100%)'
+                      : 'radial-gradient(circle at center, rgba(241, 245, 249, 0.95) 0%, rgba(226, 232, 240, 0.85) 50%, rgba(203, 213, 225, 0.75) 100%)',
+                    boxShadow: theme === 'dark'
+                      ? '0 0 0 1px rgba(148, 163, 184, 0.15), 0 2px 8px rgba(71, 85, 105, 0.2), 0 4px 16px rgba(51, 65, 85, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.05)'
+                      : '0 0 0 1px rgba(203, 213, 225, 0.4), 0 2px 8px rgba(100, 116, 139, 0.15), 0 4px 16px rgba(71, 85, 105, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.8), inset 0 -1px 3px rgba(148, 163, 184, 0.1)',
+                    border: theme === 'dark'
+                      ? '1px solid rgba(148, 163, 184, 0.2)'
+                      : '1px solid rgba(226, 232, 240, 0.8)',
+                    backdropFilter: 'blur(16px) saturate(1.3)',
                   }}
                 />
               )}
@@ -96,15 +106,18 @@ export function Navbar() {
                     }}
                     onMouseEnter={() => updateIndicator(path)}
                     onMouseLeave={() => updateIndicator(location.pathname)}
-                    className="group relative z-10 px-3 py-1 rounded-full flex items-center justify-center whitespace-nowrap transition-colors duration-200 ease-out"
+                    className="group relative z-10 px-3 py-1 rounded-full flex items-center justify-center whitespace-nowrap transition-all duration-300 ease-out"
                   >
                     <span
                       className={[
-                        'transition-all duration-200 ease-out',
+                        'transition-all duration-300 ease-out',
                         active
-                          ? 'bg-gradient-to-r from-sky-700 via-teal-600 to-indigo-700 bg-clip-text text-transparent font-semibold scale-105'
-                          : 'text-text-subtle group-hover:bg-gradient-to-r group-hover:from-sky-700 group-hover:via-teal-600 group-hover:to-indigo-700 group-hover:bg-clip-text group-hover:text-transparent group-hover:font-semibold group-hover:scale-105',
+                          ? 'bg-gradient-to-r from-sky-700 via-teal-600 to-indigo-700 bg-clip-text text-transparent font-semibold'
+                          : 'text-text-subtle group-hover:bg-gradient-to-r group-hover:from-sky-700 group-hover:via-teal-600 group-hover:to-indigo-700 group-hover:bg-clip-text group-hover:text-transparent group-hover:font-medium group-hover:scale-[1.05]',
                       ].join(' ')}
+                      style={{
+                        transform: active ? 'scale(1.05)' : undefined,
+                      }}
                     >
                       {label}
                     </span>
@@ -116,13 +129,31 @@ export function Navbar() {
 
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg text-text-subtle hover:text-text hover:bg-surface transition-colors"
+            className="relative p-2.5 rounded-xl transition-all duration-300 ease-out group overflow-hidden"
             aria-label="Toggle theme"
+            style={{
+              background: theme === 'dark'
+                ? 'linear-gradient(135deg, rgba(51, 65, 85, 0.3) 0%, rgba(30, 41, 59, 0.2) 100%)'
+                : 'linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.6) 100%)',
+              boxShadow: theme === 'dark'
+                ? '0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.05)'
+                : '0 2px 8px rgba(148, 163, 184, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.8)',
+              border: theme === 'dark'
+                ? '1px solid rgba(71, 85, 105, 0.3)'
+                : '1px solid rgba(226, 232, 240, 0.6)',
+            }}
           >
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{
+                background: theme === 'dark'
+                  ? 'radial-gradient(circle at center, rgba(251, 191, 36, 0.1) 0%, transparent 70%)'
+                  : 'radial-gradient(circle at center, rgba(139, 92, 246, 0.08) 0%, transparent 70%)',
+              }}
+            />
             {theme === 'dark' ? (
-              <HiSun className="w-5 h-5" />
+              <HiSun className="w-5 h-5 relative z-10 transition-all duration-300 group-hover:scale-110 group-hover:rotate-45 text-amber-400 group-hover:text-amber-300" />
             ) : (
-              <HiMoon className="w-5 h-5" />
+              <HiMoon className="w-5 h-5 relative z-10 transition-all duration-300 group-hover:scale-110 group-hover:-rotate-12 text-indigo-400 group-hover:text-indigo-500" />
             )}
           </button>
         </div>
@@ -205,4 +236,4 @@ export function Navbar() {
       )}
     </nav>
   )
-} 
+}
