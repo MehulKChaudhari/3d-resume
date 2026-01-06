@@ -33,123 +33,42 @@
     opacity: 0.95;
   }
 
-  .avatar-wave-border {
+  .avatar-shell {
     position: relative;
+    border-radius: 9999px;
+  }
+
+  .avatar-wave-container {
+    position: absolute;
+    inset: -6px;
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
+    pointer-events: none;
     border-radius: 50%;
     overflow: visible;
   }
 
-  .avatar-wave-border::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    border-radius: 50%;
-    background: conic-gradient(
-      from 0deg,
-      transparent 0deg,
-      rgba(14, 165, 233, 0.25) 8deg,
-      rgba(20, 184, 166, 0.35) 16deg,
-      rgba(99, 102, 241, 0.25) 24deg,
-      transparent 32deg,
-      rgba(14, 165, 233, 0.2) 40deg,
-      rgba(20, 184, 166, 0.3) 48deg,
-      rgba(99, 102, 241, 0.2) 56deg,
-      transparent 64deg,
-      rgba(14, 165, 233, 0.3) 72deg,
-      rgba(20, 184, 166, 0.4) 80deg,
-      rgba(99, 102, 241, 0.3) 88deg,
-      transparent 96deg,
-      rgba(14, 165, 233, 0.22) 104deg,
-      rgba(20, 184, 166, 0.32) 112deg,
-      rgba(99, 102, 241, 0.22) 120deg,
-      transparent 128deg,
-      rgba(14, 165, 233, 0.28) 136deg,
-      rgba(20, 184, 166, 0.38) 144deg,
-      rgba(99, 102, 241, 0.28) 152deg,
-      transparent 160deg,
-      rgba(14, 165, 233, 0.18) 168deg,
-      rgba(20, 184, 166, 0.28) 176deg,
-      rgba(99, 102, 241, 0.18) 184deg,
-      transparent 192deg,
-      rgba(14, 165, 233, 0.32) 200deg,
-      rgba(20, 184, 166, 0.42) 208deg,
-      rgba(99, 102, 241, 0.32) 216deg,
-      transparent 224deg,
-      rgba(14, 165, 233, 0.24) 232deg,
-      rgba(20, 184, 166, 0.34) 240deg,
-      rgba(99, 102, 241, 0.24) 248deg,
-      transparent 256deg,
-      rgba(14, 165, 233, 0.26) 264deg,
-      rgba(20, 184, 166, 0.36) 272deg,
-      rgba(99, 102, 241, 0.26) 280deg,
-      transparent 288deg,
-      rgba(14, 165, 233, 0.2) 296deg,
-      rgba(20, 184, 166, 0.3) 304deg,
-      rgba(99, 102, 241, 0.2) 312deg,
-      transparent 320deg,
-      rgba(14, 165, 233, 0.3) 328deg,
-      rgba(20, 184, 166, 0.4) 336deg,
-      rgba(99, 102, 241, 0.3) 344deg,
-      transparent 352deg,
-      transparent 360deg
-    );
-    animation: wave-rotate 25s linear infinite;
-    filter: blur(0.8px);
-    opacity: 0.85;
-    mask: radial-gradient(circle, transparent calc(100% - 3px), black calc(100% - 3px));
-    -webkit-mask: radial-gradient(circle, transparent calc(100% - 3px), black calc(100% - 3px));
+  .avatar-wave-svg {
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    animation: wave-rotate 20s linear infinite;
   }
 
-  .avatar-wave-border::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 50%;
-    background: conic-gradient(
-      from 180deg,
-      transparent 0deg,
-      rgba(99, 102, 241, 0.2) 10deg,
-      rgba(20, 184, 166, 0.3) 20deg,
-      rgba(14, 165, 233, 0.2) 30deg,
-      transparent 40deg,
-      rgba(99, 102, 241, 0.15) 50deg,
-      rgba(20, 184, 166, 0.25) 60deg,
-      rgba(14, 165, 233, 0.15) 70deg,
-      transparent 80deg,
-      rgba(99, 102, 241, 0.25) 90deg,
-      rgba(20, 184, 166, 0.35) 100deg,
-      rgba(14, 165, 233, 0.25) 110deg,
-      transparent 120deg,
-      rgba(99, 102, 241, 0.18) 130deg,
-      rgba(20, 184, 166, 0.28) 140deg,
-      rgba(14, 165, 233, 0.18) 150deg,
-      transparent 160deg,
-      rgba(99, 102, 241, 0.22) 170deg,
-      rgba(20, 184, 166, 0.32) 180deg,
-      rgba(14, 165, 233, 0.22) 190deg,
-      transparent 200deg,
-      rgba(99, 102, 241, 0.28) 210deg,
-      rgba(20, 184, 166, 0.38) 220deg,
-      rgba(14, 165, 233, 0.28) 230deg,
-      transparent 240deg,
-      rgba(99, 102, 241, 0.16) 250deg,
-      rgba(20, 184, 166, 0.26) 260deg,
-      rgba(14, 165, 233, 0.16) 270deg,
-      transparent 280deg,
-      rgba(99, 102, 241, 0.24) 290deg,
-      rgba(20, 184, 166, 0.34) 300deg,
-      rgba(14, 165, 233, 0.24) 310deg,
-      transparent 320deg,
-      rgba(99, 102, 241, 0.2) 330deg,
-      rgba(20, 184, 166, 0.3) 340deg,
-      rgba(14, 165, 233, 0.2) 350deg,
-      transparent 360deg
-    );
-    animation: wave-rotate 30s linear infinite reverse;
-    filter: blur(0.6px);
+  .avatar-wave-path {
+    mix-blend-mode: screen;
+  }
+
+  .avatar-wave-path-1 {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 2px rgba(14, 165, 233, 0.5));
+    animation: wave-glow-1 2s ease-in-out infinite;
+  }
+
+  .avatar-wave-path-2 {
     opacity: 0.65;
-    mask: radial-gradient(circle, transparent calc(100% - 2px), black calc(100% - 2px));
-    -webkit-mask: radial-gradient(circle, transparent calc(100% - 2px), black calc(100% - 2px));
+    filter: drop-shadow(0 0 1.5px rgba(99, 102, 241, 0.4));
+    animation: wave-glow-2 2.5s ease-in-out infinite;
   }
 
   @keyframes wave-rotate {
@@ -158,6 +77,28 @@
     }
     to {
       transform: rotate(360deg);
+    }
+  }
+
+  @keyframes wave-glow-1 {
+    0%, 100% {
+      opacity: 0.6;
+      filter: drop-shadow(0 0 2px rgba(14, 165, 233, 0.4));
+    }
+    50% {
+      opacity: 0.9;
+      filter: drop-shadow(0 0 4px rgba(14, 165, 233, 0.8));
+    }
+  }
+
+  @keyframes wave-glow-2 {
+    0%, 100% {
+      opacity: 0.4;
+      filter: drop-shadow(0 0 1px rgba(99, 102, 241, 0.3));
+    }
+    50% {
+      opacity: 0.7;
+      filter: drop-shadow(0 0 3px rgba(99, 102, 241, 0.6));
     }
   }
 }

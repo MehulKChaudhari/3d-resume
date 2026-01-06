@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { HiMoon, HiSun, HiMenu, HiX } from 'react-icons/hi'
 import { resumeData } from '../data/resume'
+import { AvatarWaveAnimation } from './AvatarWaveAnimation'
 
 const NAV_LINKS = [
   { path: '/', label: 'Home' },
@@ -51,22 +52,21 @@ export function Navbar() {
             to="/"
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-text hover:text-accent transition-colors"
           >
-            <div className="relative inline-flex h-8 w-8 sm:h-9 sm:w-9">
-              <div className="avatar-wave-border h-full w-full">
-                <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a]">
-                  <img
-                    src="/assets/portfolio-site-image.jpeg"
-                    alt={`${resumeData.name} - Software Engineer`}
-                    className="h-full w-full object-cover"
-                  />
-                  <div className="pointer-events-none absolute inset-0">
-                    <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />
-                  </div>
+            <div className="relative inline-flex h-8 w-8 sm:h-9 sm:w-9 avatar-shell">
+              <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a] z-10">
+                <img
+                  src="/assets/portfolio-site-image.jpeg"
+                  alt={`${resumeData.name} - Software Engineer`}
+                  className="h-full w-full object-cover rounded-full"
+                />
+                <div className="pointer-events-none absolute inset-0">
+                  <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />
                 </div>
               </div>
+              <AvatarWaveAnimation gradientIdPrefix="nav-wave" />
             </div>
             <span className="hidden sm:inline">Mehul Chaudhari</span>
-          </Link>
+        </Link>
 
           <div className="flex-1 flex justify-center">
             <div
@@ -128,24 +128,23 @@ export function Navbar() {
 
         {/* Mobile Navbar */}
         <div className="md:hidden flex items-center justify-between h-full">
-          <Link
+          <Link 
             to="/"
             className="inline-flex items-center gap-2 text-xs font-medium text-text hover:text-accent transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="relative inline-flex h-8 w-8">
-              <div className="avatar-wave-border h-full w-full">
-                <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a]">
-                  <img
-                    src="/assets/portfolio-site-image.jpeg"
-                    alt={`${resumeData.name} - Software Engineer`}
-                    className="h-full w-full object-cover"
-                  />
-                  <div className="pointer-events-none absolute inset-0">
-                    <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />
-                  </div>
+            <div className="relative inline-flex h-8 w-8 avatar-shell">
+              <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a] z-10">
+                <img
+                  src="/assets/portfolio-site-image.jpeg"
+                  alt={`${resumeData.name} - Software Engineer`}
+                  className="h-full w-full object-cover rounded-full"
+                />
+                <div className="pointer-events-none absolute inset-0">
+                  <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />
                 </div>
               </div>
+              <AvatarWaveAnimation gradientIdPrefix="nav-wave" />
             </div>
           </Link>
 
@@ -204,4 +203,4 @@ export function Navbar() {
       )}
     </nav>
   )
-}
+} 

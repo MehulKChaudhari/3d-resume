@@ -1,5 +1,6 @@
 import { resumeData } from '../data/resume'
 import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa'
+import { AvatarWaveAnimation } from './AvatarWaveAnimation'
 
 export function Hero() {
   const socialLinks = {
@@ -13,19 +14,18 @@ export function Hero() {
       <div className="w-full grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
         <div className="space-y-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-            <div className="relative inline-flex h-20 w-20 sm:h-24 sm:w-24">
-              <div className="avatar-wave-border h-full w-full">
-                <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a] shadow-md">
-                  <img
-                    src="/assets/portfolio-site-image.jpeg"
-                    alt={`${resumeData.name} - Software Engineer`}
-                    className="h-full w-full object-cover"
-                  />
-                  <div className="pointer-events-none absolute inset-0">
-                    <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />
-                  </div>
+            <div className="relative inline-flex h-20 w-20 sm:h-24 sm:w-24 avatar-shell">
+              <div className="relative h-full w-full rounded-full overflow-hidden bg-[#12333a] shadow-md z-10">
+                <img
+                  src="/assets/portfolio-site-image.jpeg"
+                  alt={`${resumeData.name} - Software Engineer`}
+                  className="h-full w-full object-cover rounded-full"
+                />
+                <div className="pointer-events-none absolute inset-0">
+                  <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />
                 </div>
               </div>
+              <AvatarWaveAnimation gradientIdPrefix="hero-wave" />
             </div>
             <p className="text-xs font-medium tracking-[0.18em] uppercase text-text-subtle">
               Software engineer • Full stack • Open source • Business-aware
