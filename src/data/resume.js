@@ -39,12 +39,11 @@ export const resumeData = {
       "company": "NeoG Camp, Kanak Krea(OPC) Pvt Ltd",
       "duration": "June 2021 – November 2021",
       "points": [
-        "Built a custom admissions portal for NeoG Camp using Next.js (React), improving the user experience for 5,000+ students annually.",
-        "Designed and integrated an animated admission ticket UI that appears upon project acceptance, enabling users to share achievements on X (formerly Twitter) and boost engagement.",
-        "Collaborated directly with the CEO to gather product requirements and translate them into actionable frontend features.",
-        "Leveraged Chakra UI and optimized component rendering, reducing UI load times and enhancing visual consistency.",
-        "Performed peer code reviews and wrote tests to maintain code quality and catch bugs early in the development cycle.",
-        "Utilized TypeScript throughout the codebase, achieving a 90% bug resolution rate and contributing to production stability."
+        "Built an end-to-end admissions platform used by ~6,000 applicants, owning both frontend and backend flows for portfolio submission, review, and resubmission, which reduced manual coordination for the admissions team.",
+        "Designed and implemented JWT-based authentication with role-based access control, enabling secure separation of student, reviewer, and admin workflows while keeping the system extensible for future cohorts.",
+        "Implemented a conditional resubmission system with checklist-driven feedback, allowing rejected applicants to clearly understand gaps and resubmit portfolios, improving review efficiency and applicant completion rates.",
+        "Developed a shareable animated admission ticket UI shown on acceptance, leading to high organic sharing on LinkedIn and X and turning admissions into a built-in social distribution channel.",
+        "Collaborated directly with the CEO to translate high-level admission and business requirements into concrete product features, making architectural and UX decisions that balanced scale, security, and speed of iteration."
       ],
       "tech_stack": ["Next.js", "React", "TypeScript", "Chakra UI", "MongoDB", "Product Engineering", "Code Reviews", "Testing"]
     }
