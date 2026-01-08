@@ -127,9 +127,13 @@ export function Hero() {
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-text-muted font-light leading-relaxed max-w-xl">
-              I work at the intersection of frontend, backend, and product — designing APIs,
-              shaping UX, and making trade-offs that keep systems stable, maintainable, and aligned
-              with how the business actually makes money.
+              <span className="text-text-subtle/80">I am</span>{' '}
+              <span className="font-medium text-text transition-all duration-300 hover:bg-gradient-to-r hover:from-sky-600 hover:via-teal-500 hover:to-indigo-600 hover:dark:from-sky-400 hover:dark:via-teal-300 hover:dark:to-indigo-400 hover:bg-clip-text hover:text-transparent cursor-default">
+                {resumeData.name}
+              </span>
+              , and I work at the intersection of frontend, backend, and product. 
+              I design APIs, shape UX, and make trade-offs that keep systems stable, maintainable, and aligned 
+              with how businesses actually make money.
             </p>
           </div>
 

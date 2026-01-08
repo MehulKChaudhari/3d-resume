@@ -66,7 +66,6 @@ export function Navbar() {
               </div>
               <AvatarWaveAnimation gradientIdPrefix="nav-wave" />
             </div>
-            <span className="hidden sm:inline">Mehul Chaudhari</span>
         </Link>
 
           <div className="flex-1 flex justify-center">
@@ -236,4 +235,4 @@ export function Navbar() {
       )}
     </nav>
   )
-}
+} 
