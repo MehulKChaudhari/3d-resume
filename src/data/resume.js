@@ -14,23 +14,24 @@ export const resumeData = {
       "company": "YUDEK. Inc",
       "duration": "2022 - present",
       "points": [
-        "Developing a comprehensive web application and browser extension for YUDEK, enabling seamless access, organization, and sharing of links, PDFs, and other essential files.",
-        "Delivered key features end to end, including Public and Private Item Sharing: Enabled users to share public items via links, while keeping private items secure.",
-        "Created a UX-friendly browsing history feature, allowing users to save all browsing history to their YUDEK account for easier management compared to traditional browsers.",
-        "Utilized Ember.js, ember-data, Node.js, and Firestore for front-end and back-end development, utilizing TypeScript in both to detect and resolve bugs early, achieving a 90% bug resolution rate and ensuring production stability.",
-        "Formulated acceptance, integration, and unit tests across codebases, achieving over 75% test coverage.",
-        "Addressed all user feedback, resolving 100% of reported issues and significantly enhancing the user experience."
+        "Reduced initial page load from ~50 API calls to 4–5 by designing batched backend APIs in Node.js and Express, fetching rooms, tables, cards, and decks together in structured chunks for faster and more reliable loads.",
+        "Led a frontend and backend migration from JavaScript to TypeScript across Ember.js and backend services, preventing ~90% of production bugs by catching integration and runtime issues earlier through typed contracts.",
+        "Improved content loading performance by introducing a CDN caching layer via Cloudinary and storing derived image metadata for cards and decks, reducing repeat fetches and speeding up browsing.",
+        "Built fine-grained access controls for user content, supporting public items, user-specific sharing, and collaborative tables, while keeping private data strictly isolated.",
+        "Strengthened platform security and developer confidence by adding CSRF protection, enforcing a strict Content Security Policy (CSP), and stabilizing broken test suites and CI pipelines so failures were reproducible locally and in CI.",
+        "Designed a pluggable file preview system supporting 30+ file types, eliminating mandatory downloads and cutting 2–3 steps per file view, which improved UX and drove higher feature adoption by users, backed by scalable storage on AWS S3."
       ],
       "tech_stack": ["Ember.js", "TypeScript", "Node.js", "Firestore", "AWS", "Cloudinary", "Jest", "Browser Extension APIs", "System Design", "Test-Driven Development", "Production Systems"]
     },
     {
       "title": "Frontend Engineer",
       "company": "Freelance (NDA)",
+      "duration": "May 2022 - Dec 2025",
       "points": [
-        "Contributed to and enhanced multiple micro-frontends for a large-scale web application with over 50 dynamic form pages using React, Redux, SCSS, Mantine, and Vitest.",
-        "Improved frontend performance by applying memoisation strategies (useMemo, useCallback) and optimising state management to reduce unnecessary re-renders.",
-        "Developed complex, dynamic forms with custom inputs and implemented robust client-side validation and error handling to enhance UX and prevent user errors.",
-        "Led accessibility improvements by implementing semantic HTML, keyboard navigation, and ARIA roles, achieving 95% tabbing coverage and aligning with WCAG standards."
+        "Improved page load and UI responsiveness by ~30–35% by fixing expensive render paths and eliminating unnecessary re-renders caused by parent state changes using React.Memo, useMemo, and useCallback, reducing redundant renders by ~50%.",
+        "Built complex, dynamic forms with custom inputs and client-side validation, ensuring all required fields were validated before submission and reducing incomplete form errors by ~25%.",
+        "Created reusable React components shared across multiple product areas, improving UI consistency and reducing duplicated logic.",
+        "Improved accessibility across the application by implementing semantic HTML, keyboard navigation, and ARIA roles, achieving ~95% tabbing coverage and aligning core flows with WCAG guidelines."
       ],
       "tech_stack": ["React", "Redux", "TypeScript", "SCSS", "Mantine", "Vitest", "Micro-frontends", "Performance Optimization"]
     },

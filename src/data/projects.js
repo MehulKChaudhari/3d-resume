@@ -1,38 +1,52 @@
 export const projectsData = [
   {
     id: 1,
-    title: "YUDEK Platform",
+    title: "RedirIQ",
+    slug: "rediriq",
     type: "full-stack",
-    description: "Comprehensive web application and browser extension for organizing and sharing links, PDFs, and files.",
-    problem: "Users needed a unified system to access, organize, and share essential files across devices.",
-    solution: "Built end-to-end features including public/private sharing, secure item management, and browser history integration.",
-    complexity: "Full-stack complexity: TypeScript across Ember.js frontend and Node.js backend, Firestore for real-time data, browser extension APIs, and comprehensive test coverage.",
-    tech: ["Ember.js", "TypeScript", "Node.js", "Firestore", "Browser Extension APIs"],
-    link: null
-  },
-  {
-    id: 2,
-    title: "NeoG Camp Admissions Portal",
-    type: "frontend",
-    description: "Custom admissions portal handling 5,000+ annual student applications with animated acceptance tickets.",
-    problem: "Existing admission process lacked engagement and sharing capabilities for accepted students.",
-    solution: "Built Next.js portal with animated ticket UI that enables social sharing, improving user experience and engagement.",
-    complexity: "Frontend complexity: Dynamic form handling, animation performance, social media integration, and TypeScript for type safety.",
-    tech: ["Next.js", "React", "TypeScript", "Chakra UI"],
-    link: null
-  },
-  {
-    id: 3,
-    title: "Micro-frontend Forms System",
-    type: "frontend",
-    description: "Large-scale web application with 50+ dynamic form pages, optimized for performance and accessibility.",
-    problem: "Complex form system needed performance optimization and WCAG compliance for enterprise use.",
-    solution: "Implemented memoization strategies, optimized state management, and achieved 95% keyboard navigation coverage.",
-    complexity: "Frontend complexity: State management optimization, custom validation, accessibility implementation, and micro-frontend architecture.",
-    tech: ["React", "Redux", "SCSS", "Mantine", "Vitest"],
-    link: null
+    description: "Edge-optimized link resolution system with cache-first architecture, reducing redirect latency to ~1–2 seconds globally.",
+    points: [
+      "Deployed redirect handling at the edge using Cloudflare Workers, executing resolution closer to users and stabilizing global redirect latency at ~1–2 seconds.",
+      "Designed a cache-first lookup flow with Redis + PostgreSQL in Node.js/Express, cutting database reads by ~60% and stabilizing response times for hot paths.",
+      "Built deterministic route-based resolution with unique slug generation, cleanly separating redirect paths from application routes to avoid collisions and fallback errors.",
+      "Implemented production-safe request handling with CORS, validation, and controlled redirects, deploying backend services on Railway for reliability.",
+      "Developed a lightweight management UI using React, Tailwind CSS, and React Query to handle state, errors, and observability without over-fetching."
+    ],
+    tech: ["React", "Redis", "PostgreSQL", "Node.js", "Express", "TypeScript", "Tailwind CSS", "React Query", "Railway", "MongoDB", "Cloudflare"],
+    image: "/projects/rediriq/rediriq.png",
+    live: "https://rediriq.mehul.wiki/",
+    github: "https://github.com/MehulKChaudhari/redirIQ",
+    sequenceDiagram: `sequenceDiagram
+    participant Client
+    participant Backend
+    participant Redis
+    participant Postgres
+    participant MongoDB
+
+    %% Shorten URL
+    Client->>Backend: POST /api/shorten (original URL)
+    Backend->>Postgres: Save slug + original URL
+    Backend->>Redis: Cache slug mapping
+    Backend-->>Client: Return short slug
+
+    %% Redirect
+    Client->>Backend: GET /:slug
+    Backend->>Redis: Check cache
+    alt Slug found in Redis
+        Redis-->>Backend: original URL
+    else Slug not in Redis
+        Backend->>Postgres: Get original URL
+        Backend->>Redis: Cache slug
+    end
+    Backend-->>Client: 301 Redirect to original URL
+
+    %% Get analytics
+    Client->>Backend: GET /api/analytics/:slug
+    Backend->>MongoDB: Fetch analytics data
+    Backend-->>Client: Return stats`,
+    hldDiagram: "/projects/rediriq/diagram.png"
   }
 ]
 
-export const curatedProjects = projectsData.slice(0, 2)
+export const curatedProjects = projectsData.slice(0, 1)
 

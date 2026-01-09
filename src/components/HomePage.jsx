@@ -3,6 +3,7 @@ import { OpenSourceSection } from './OpenSourceSection'
 import { WorkExperience } from './WorkExperience'
 import { ProjectsSection } from './ProjectsSection'
 import { TalksSection } from './TalksSection'
+import { ArticlesSection } from './BlogsSection'
 import { StatsBar } from './StatsBar'
 
 export function HomePage() {
@@ -15,6 +16,7 @@ export function HomePage() {
           <OpenSourceSection />
           <WorkExperience />
           <ProjectsSection />
+          <ArticlesSection />
           <TalksSection />
           <StatsBar />
         </div>

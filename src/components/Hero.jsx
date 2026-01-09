@@ -9,7 +9,6 @@ export function Hero() {
   const avatarRef = useRef(null)
   const [navbarPosition, setNavbarPosition] = useState({ x: 0, y: 0, size: 36 })
   
-  // Get navbar avatar position
   useEffect(() => {
     const updateNavbarPosition = () => {
       const navbarAvatar = document.querySelector('[data-navbar-avatar]')
@@ -40,17 +39,14 @@ export function Hero() {
     offset: ['start start', 'end start'],
   })
 
-  // Smooth spring animation for scroll - more subtle
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 80,
     damping: 35,
     restDelta: 0.001,
   })
   
-  // Clamp progress to make animation more subtle (only animate 60% of scroll)
   const clampedProgress = useTransform(smoothProgress, (value) => Math.min(value * 1.2, 1))
 
-  // Hero avatar size - calculate dynamically
   const heroSizeRef = useRef(96)
   useEffect(() => {
     if (avatarRef.current) {
@@ -64,14 +60,9 @@ export function Hero() {
     [1, navbarPosition.size > 0 && heroSizeRef.current > 0 ? navbarPosition.size / heroSizeRef.current : 0.375]
   )
   
-  // Calculate position transform - more subtle movement
   const x = useTransform(clampedProgress, [0, 1], [0, navbarPosition.x])
   const y = useTransform(clampedProgress, [0, 1], [0, navbarPosition.y])
-  
-  // Opacity: very subtle fade
   const opacity = useTransform(clampedProgress, [0, 0.8, 1], [1, 0.99, 0.97])
-  
-  // Z-index: bring to front as it moves
   const zIndex = useTransform(clampedProgress, [0, 0.2, 1], [10, 50, 1000])
 
   const socialLinks = {
@@ -166,8 +157,6 @@ export function Hero() {
               <FaLinkedin className="w-6 h-6" />
             </a>
           </div>
-
-          {/* Recent open source moved to dedicated section below hero */}
         </div>
 
         <div className="w-full">

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState, useMemo, useLayoutEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { HiMoon, HiSun, HiMenu, HiX } from 'react-icons/hi'
@@ -10,22 +10,40 @@ const NAV_LINKS = [
   { path: '/projects', label: 'Projects' },
   { path: '/open-source', label: 'Open Source' },
   { path: '/talks', label: 'Talks' },
+  { path: '/articles', label: 'Articles' },
 ]
 
 export function Navbar() {
   const location = useLocation()
   const { theme, toggleTheme } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [hoveredPath, setHoveredPath] = useState(null)
 
-  const isActive = (path) => location.pathname === path
+  const isActive = (path) => {
+    if (path === '/') {
+      return location.pathname === '/'
+    }
+    return location.pathname.startsWith(path)
+  }
+
+  const activePath = useMemo(() => {
+    for (const { path } of NAV_LINKS) {
+      if (isActive(path)) {
+        return path
+      }
+    }
+    return '/'
+  }, [location.pathname])
 
   const containerRef = useRef(null)
   const linkRefs = useRef({})
   const [indicator, setIndicator] = useState({ left: 0, width: 0, visible: false })
 
-  const updateIndicator = (path) => {
+  const targetPath = hoveredPath ?? activePath
+
+  useLayoutEffect(() => {
     const container = containerRef.current
-    const linkEl = linkRefs.current[path]
+    const linkEl = linkRefs.current[targetPath]
     if (!container || !linkEl) return
 
     const containerRect = container.getBoundingClientRect()
@@ -36,17 +54,15 @@ export function Navbar() {
       width: linkRect.width,
       visible: true,
     })
-  }
+  }, [targetPath])
 
-  useEffect(() => {
-    updateIndicator(location.pathname)
+  useLayoutEffect(() => {
     setMobileMenuOpen(false)
   }, [location.pathname])
 
   return (
     <nav className="sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-border transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 h-16 sm:h-18">
-        {/* Desktop Navbar */}
         <div className="hidden md:flex items-center justify-between gap-3 h-full">
           <Link
             to="/"
@@ -103,8 +119,8 @@ export function Navbar() {
                     ref={(el) => {
                       linkRefs.current[path] = el
                     }}
-                    onMouseEnter={() => updateIndicator(path)}
-                    onMouseLeave={() => updateIndicator(location.pathname)}
+                    onMouseEnter={() => setHoveredPath(path)}
+                    onMouseLeave={() => setHoveredPath(null)}
                     className="group relative z-10 px-3 py-1 rounded-full flex items-center justify-center whitespace-nowrap transition-all duration-300 ease-out"
                   >
                     <span
@@ -157,7 +173,6 @@ export function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Navbar */}
         <div className="md:hidden flex items-center justify-between h-full">
           <Link 
             to="/"
@@ -194,7 +209,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-border bg-surface/95 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 py-4 space-y-2">
