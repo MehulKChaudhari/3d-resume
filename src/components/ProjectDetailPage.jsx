@@ -1,10 +1,17 @@
 import { useParams, Link } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import { FaGithub, FaExternalLinkAlt, FaArrowLeft } from 'react-icons/fa'
-import mermaid from 'mermaid'
 import { projectsData } from '../data/projects'
 import { getMermaidConfig } from '../utils/constants'
 import { useTheme } from '../context/ThemeContext'
+
+let mermaid = null
+const loadMermaid = async () => {
+  if (!mermaid) {
+    mermaid = (await import('mermaid')).default
+  }
+  return mermaid
+}
 
 const typeLabels = {
   'full-stack': 'Full-stack',
@@ -26,9 +33,11 @@ export function ProjectDetailPage() {
 
   useEffect(() => {
     if (project?.sequenceDiagram) {
-      mermaid.initialize(getMermaidConfig(theme))
-      requestAnimationFrame(() => {
-        mermaid.contentLoaded()
+      loadMermaid().then(m => {
+        m.initialize(getMermaidConfig(theme))
+        requestAnimationFrame(() => {
+          m.contentLoaded()
+        })
       })
     }
   }, [project, theme])
@@ -66,6 +75,9 @@ export function ProjectDetailPage() {
                 src={project.image}
                 alt={project.title}
                 className="w-full h-auto"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
               />
             </div>
           )}

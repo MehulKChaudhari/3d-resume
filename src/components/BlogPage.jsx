@@ -1,13 +1,35 @@
 import { useParams, Link, useLocation } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
 import { useState, useEffect, useRef, useMemo } from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeHighlight from 'rehype-highlight'
-import mermaid from 'mermaid'
 import { articlesData } from '../data/articles'
 import { getMermaidConfig, READING_TIME_WPM, SCROLL_BEHAVIOR } from '../utils/constants'
 import { useTheme } from '../context/ThemeContext'
+
+let ReactMarkdown = null
+let remarkGfm = null
+let rehypeHighlight = null
+let mermaid = null
+
+const loadMarkdown = async () => {
+  if (!ReactMarkdown) {
+    const [rm, rgfm, rh] = await Promise.all([
+      import('react-markdown'),
+      import('remark-gfm'),
+      import('rehype-highlight')
+    ])
+    ReactMarkdown = rm.default
+    remarkGfm = rgfm.default
+    rehypeHighlight = rh.default
+  }
+  return { ReactMarkdown, remarkGfm, rehypeHighlight }
+}
+
+const loadMermaid = async () => {
+  if (!mermaid) {
+    mermaid = (await import('mermaid')).default
+  }
+  return mermaid
+}
 
 const generateHeadingId = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
@@ -18,8 +40,11 @@ export function ArticlePage() {
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [markdownLoaded, setMarkdownLoaded] = useState(false)
+  const [markdownComponents, setMarkdownComponents] = useState(null)
   const article = articlesData.find(a => a.slug === slug)
   const mermaidRef = useRef(null)
+  const hasMermaidRef = useRef(false)
 
   const headings = useMemo(() => {
     if (!content) return []
@@ -62,13 +87,18 @@ export function ArticlePage() {
       return
     }
 
-    fetch(article.contentPath)
-      .then(res => {
+    Promise.all([
+      fetch(article.contentPath).then(res => {
         if (!res.ok) throw new Error('Failed to load article content')
         return res.text()
-      })
-      .then(text => {
+      }),
+      loadMarkdown()
+    ])
+      .then(([text, components]) => {
         setContent(text)
+        setMarkdownComponents(components)
+        setMarkdownLoaded(true)
+        hasMermaidRef.current = text.includes('```mermaid')
         setLoading(false)
       })
       .catch(err => {
@@ -78,9 +108,11 @@ export function ArticlePage() {
   }, [article])
 
   useEffect(() => {
-    if (content && mermaidRef.current) {
-      mermaid.initialize(getMermaidConfig(theme))
-      mermaid.contentLoaded()
+    if (content && hasMermaidRef.current && mermaidRef.current) {
+      loadMermaid().then(m => {
+        m.initialize(getMermaidConfig(theme))
+        m.contentLoaded()
+      })
     }
   }, [content, theme])
 
@@ -176,15 +208,20 @@ export function ArticlePage() {
                   src={article.image}
                   alt={article.title}
                   className="w-full h-full object-cover"
+                  loading="eager"
+                  fetchpriority="high"
                 />
               </div>
             )}
 
-            <div className="prose prose-lg max-w-none mt-12" ref={mermaidRef}>
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeHighlight]}
-              components={{
+            {!markdownLoaded ? (
+              <div className="text-center py-12 text-text-subtle">Loading content...</div>
+            ) : markdownComponents ? (
+              <div className="prose prose-lg max-w-none mt-12" ref={mermaidRef}>
+                <markdownComponents.ReactMarkdown
+                  remarkPlugins={[markdownComponents.remarkGfm]}
+                  rehypePlugins={[markdownComponents.rehypeHighlight]}
+                  components={{
                 img(props) {
                   return (
                     <div className="my-8 flex justify-center">
@@ -193,6 +230,7 @@ export function ArticlePage() {
                         className="max-w-full rounded-lg shadow-lg"
                         style={{ maxWidth: '700px' }}
                         loading="lazy"
+                        decoding="async"
                       />
                     </div>
                   )
@@ -287,11 +325,12 @@ export function ArticlePage() {
                     />
                   )
                 }
-              }}
-            >
-              {content}
-            </ReactMarkdown>
-            </div>
+                  }}
+                >
+                  {content}
+                </markdownComponents.ReactMarkdown>
+              </div>
+            ) : null}
           </article>
 
           <aside className="hidden lg:block w-64 flex-shrink-0">
