@@ -5,6 +5,23 @@ import { HiMoon, HiSun, HiMenu, HiX } from 'react-icons/hi'
 import { resumeData } from '../data/resume'
 import { AvatarWaveAnimation } from './AvatarWaveAnimation'
 
+const routePrefetchMap = {
+  '/projects': () => import('../components/ProjectsPage'),
+  '/open-source': () => import('../components/OpenSourcePage'),
+  '/talks': () => import('../components/TalksPage'),
+  '/articles': () => import('../components/BlogsListPage'),
+}
+
+const prefetchRoute = (path) => {
+  const prefetchFn = routePrefetchMap[path]
+  if (prefetchFn && typeof window !== 'undefined') {
+    const idleCallback = window.requestIdleCallback || ((cb) => setTimeout(cb, 1))
+    idleCallback(() => {
+      prefetchFn().catch(() => {})
+    })
+  }
+}
+
 const NAV_LINKS = [
   { path: '/', label: 'Home' },
   { path: '/projects', label: 'Projects' },
@@ -19,21 +36,23 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [hoveredPath, setHoveredPath] = useState(null)
 
+  const activePath = useMemo(() => {
+    for (const { path } of NAV_LINKS) {
+      if (path === '/') {
+        if (location.pathname === '/') return path
+      } else if (location.pathname.startsWith(path)) {
+        return path
+      }
+    }
+    return '/'
+  }, [location.pathname])
+
   const isActive = (path) => {
     if (path === '/') {
       return location.pathname === '/'
     }
     return location.pathname.startsWith(path)
   }
-
-  const activePath = useMemo(() => {
-    for (const { path } of NAV_LINKS) {
-      if (isActive(path)) {
-        return path
-      }
-    }
-    return '/'
-  }, [location.pathname])
 
   const containerRef = useRef(null)
   const linkRefs = useRef({})
@@ -119,7 +138,10 @@ export function Navbar() {
                     ref={(el) => {
                       linkRefs.current[path] = el
                     }}
-                    onMouseEnter={() => setHoveredPath(path)}
+                    onMouseEnter={() => {
+                      setHoveredPath(path)
+                      prefetchRoute(path)
+                    }}
                     onMouseLeave={() => setHoveredPath(null)}
                     className="group relative z-10 px-3 py-1 rounded-full flex items-center justify-center whitespace-nowrap transition-all duration-300 ease-out"
                   >
@@ -186,6 +208,8 @@ export function Navbar() {
                   alt={`${resumeData.name} - Software Engineer`}
                   className="h-full w-full object-cover"
                   style={{ aspectRatio: '1 / 1', borderRadius: '50%' }}
+                  width="32"
+                  height="32"
                 />
                 <div className="pointer-events-none absolute inset-0">
                   <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />

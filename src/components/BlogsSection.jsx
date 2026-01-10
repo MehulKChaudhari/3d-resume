@@ -1,7 +1,8 @@
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { curatedArticles } from '../data/articles'
 
-export function ArticlesSection() {
+export const ArticlesSection = memo(function ArticlesSection() {
   return (
     <section>
       <div className="flex items-end justify-between mb-12">
@@ -81,5 +82,5 @@ export function ArticlesSection() {
       )}
     </section>
   )
-}
+})
 

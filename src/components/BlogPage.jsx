@@ -168,7 +168,7 @@ export function ArticlePage() {
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           <article className="flex-1 max-w-4xl">
             <header className="mb-8 -mx-6 sm:-mx-8 lg:-mx-0 px-6 sm:px-8 lg:px-0">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-light text-text mb-4 leading-tight tracking-tight max-w-6xl">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-light text-text mb-4 leading-tight tracking-tight max-w-6xl transition-all duration-300 hover:bg-gradient-to-r hover:from-sky-500 hover:via-teal-400 hover:to-indigo-500 hover:dark:from-sky-400 hover:dark:via-teal-300 hover:dark:to-indigo-400 hover:bg-clip-text hover:text-transparent cursor-default">
                 {article.title}
               </h1>
               <div className="flex flex-wrap items-center gap-4 text-sm text-text-subtle mb-6">
@@ -210,6 +210,9 @@ export function ArticlePage() {
                   className="w-full h-full object-cover"
                   loading="eager"
                   fetchpriority="high"
+                  decoding="async"
+                  width="1200"
+                  height="675"
                 />
               </div>
             )}
@@ -217,24 +220,26 @@ export function ArticlePage() {
             {!markdownLoaded ? (
               <div className="text-center py-12 text-text-subtle">Loading content...</div>
             ) : markdownComponents ? (
-              <div className="prose prose-lg max-w-none mt-12" ref={mermaidRef}>
-                <markdownComponents.ReactMarkdown
-                  remarkPlugins={[markdownComponents.remarkGfm]}
-                  rehypePlugins={[markdownComponents.rehypeHighlight]}
-                  components={{
-                img(props) {
-                  return (
-                    <div className="my-8 flex justify-center">
-                      <img
-                        {...props}
-                        className="max-w-full rounded-lg shadow-lg"
-                        style={{ maxWidth: '700px' }}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                  )
-                },
+                  <div className="prose prose-lg max-w-none mt-12" ref={mermaidRef}>
+                    <markdownComponents.ReactMarkdown
+                      remarkPlugins={[markdownComponents.remarkGfm]}
+                      rehypePlugins={[markdownComponents.rehypeHighlight]}
+                      components={{
+                        img(props) {
+                          return (
+                            <div className="my-8 flex justify-center">
+                              <img
+                                {...props}
+                                className="max-w-full rounded-lg shadow-lg"
+                                style={{ maxWidth: '700px' }}
+                                loading="lazy"
+                                decoding="async"
+                                width="700"
+                                height="400"
+                              />
+                            </div>
+                          )
+                        },
                 code({ inline, className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || '')
                   const isMermaid = match && match[1] === 'mermaid'
@@ -375,7 +380,7 @@ export function ArticlePage() {
 
               {article.tags && article.tags.length > 0 && (
                 <div>
-                  <h3 className="text-xs font-semibold mb-4 uppercase tracking-wider bg-gradient-to-r from-sky-500 via-teal-400 to-indigo-500 bg-clip-text text-transparent">
+                  <h3 className="text-xs font-semibold mb-4 uppercase tracking-wider bg-gradient-to-r from-sky-500 via-teal-400 to-indigo-500 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent">
                     Tags
                   </h3>
                   <div className="flex flex-wrap gap-2">

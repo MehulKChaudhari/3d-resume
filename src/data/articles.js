@@ -18,6 +18,16 @@ export const articlesData = [
     slug: "sharding-vs-partitioning",
     contentPath: "/blogs/sharding-vs-partitioning.md",
     tags: ["database", "system-design", "database-scaling", "techblog"]
+  },
+  {
+    id: 2,
+    title: "Understanding Async and Defer in JavaScript",
+    description: "Learn how async and defer attributes work in HTML script tags, their performance implications, and when to use each for optimal page loading speed.",
+    image: "/blogs/images/async-defer-head-no-attr.png",
+    date: "2021-11-11",
+    slug: "async-and-defer",
+    contentPath: "/blogs/async-and-defer.md",
+    tags: ["javascript", "html", "performance", "web-development", "frontend"]
   }
 ]
 

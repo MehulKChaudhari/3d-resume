@@ -94,6 +94,10 @@ export function Hero() {
                   alt={`${resumeData.name} - Software Engineer`}
                   className="h-full w-full object-cover"
                   style={{ aspectRatio: '1 / 1', borderRadius: '50%' }}
+                  width="96"
+                  height="96"
+                  loading="eager"
+                  fetchpriority="high"
                 />
                 <div className="pointer-events-none absolute inset-0">
                   <div className="absolute -left-1 -right-1 h-[130%] bg-white/10 rotate-[18deg]" />
