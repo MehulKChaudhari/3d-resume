@@ -28,6 +28,26 @@ export const articlesData = [
     slug: "async-and-defer",
     contentPath: "/blogs/async-and-defer.md",
     tags: ["javascript", "html", "performance", "web-development", "frontend"]
+  },
+  {
+    id: 3,
+    title: "Type of Analysis and Asymptotic Notations",
+    description: "Understanding types of algorithm analysis (Worst case, Best case, Average case) and asymptotic notations (Big-O, Omega, Theta) for analyzing algorithm performance.",
+    image: "/blogs/images/analysis-cover.png",
+    date: "2021-06-19",
+    slug: "algorithm-analysis-asymptotic-notations",
+    contentPath: "/blogs/algorithm-analysis-asymptotic-notations.md",
+    tags: ["algorithms", "data-structures", "computer-science", "complexity-analysis", "techblog"]
+  },
+  {
+    id: 4,
+    title: "Algorithms - A Deep Dive",
+    description: "Learn what algorithms are, why we analyze them, and how to compare algorithms using rate of growth. Understanding the fundamentals of algorithm analysis in computer science.",
+    image: "/blogs/images/Algorithms-A-Deep-Dive-cover.png",
+    date: "2021-06-15",
+    slug: "introduction-to-algorithms",
+    contentPath: "/blogs/introduction-to-algorithms.md",
+    tags: ["algorithms", "computer-science", "data-structures", "complexity-analysis", "techblog"]
   }
 ]
 

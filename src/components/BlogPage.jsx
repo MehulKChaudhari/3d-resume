@@ -55,7 +55,8 @@ export function ArticlePage() {
       const level = match[0].match(/^#+/)[0].length
       const text = match[1].trim()
       const id = generateHeadingId(text)
-      matches.push({ level, text, id })
+      const displayText = text.replace(/^\d+\)\s*/, '')
+      matches.push({ level, text, id, displayText })
     }
     return matches
   }, [content])
@@ -271,10 +272,23 @@ export function ArticlePage() {
                     <h2
                       id={id}
                       {...props}
-                      className="text-3xl font-semibold text-text mt-20 mb-8 first:mt-0 scroll-mt-24 pt-2 border-t border-border/50 first:border-t-0 first:pt-0"
+                      className="text-3xl font-semibold text-text mt-20 mb-8 first:mt-0 scroll-mt-24 pt-2 border-t border-border/50 first:border-t-0 first:pt-0 [h1+&]:border-t-0 [h1+&]:pt-0"
                     >
                       {children}
                     </h2>
+                  )
+                },
+                h1({ children, ...props }) {
+                  const text = String(children).replace(/\n$/, '')
+                  const id = generateHeadingId(text)
+                  return (
+                    <h1
+                      id={id}
+                      {...props}
+                      className="text-4xl font-semibold text-text mt-20 mb-8 first:mt-0 scroll-mt-24"
+                    >
+                      {children}
+                    </h1>
                   )
                 },
                 h3({ children, ...props }) {
@@ -370,7 +384,7 @@ export function ArticlePage() {
                             }
                           }}
                         >
-                          {heading.text}
+                          {heading.displayText || heading.text}
                         </a>
                       )
                     })}

@@ -16,8 +16,8 @@ const ArticlePage = lazy(() => import('./components/BlogPage').then(m => ({ defa
 const LoadingFallback = () => (
   <div className="min-h-screen flex items-center justify-center">
     <div className="text-text-subtle">Loading...</div>
-  </div>
-)
+      </div>
+  )
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
           <div className="min-h-screen bg-bg text-text transition-colors">
             <Navbar />
               <Suspense fallback={<LoadingFallback />}>
-                <Routes>
+              <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/projects" element={<ProjectsPage />} />
                   <Route path="/projects/:slug" element={<ProjectDetailPage />} />
@@ -35,7 +35,7 @@ function App() {
                   <Route path="/talks" element={<TalksPage />} />
                   <Route path="/articles" element={<ArticlesListPage />} />
                   <Route path="/articles/:slug" element={<ArticlePage />} />
-                </Routes>
+              </Routes>
               </Suspense>
         </div>
       </GithubProvider>
