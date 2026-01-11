@@ -178,8 +178,7 @@ export function Hero() {
               <div>
                 <p className="text-sm text-text-subtle mb-2">SDE · YUDEK</p>
                 <p className="text-base lg:text-lg text-text-muted leading-relaxed">
-                  Owning parts of a browser-first knowledge system — from Ember frontends to
-                  TypeScript services and Firestore data models.
+                  Owning end to end features in a browser-first knowledge system — shipping from frontend interfaces to backend services and data models.
                 </p>
               </div>
             </div>
