@@ -1,26 +1,25 @@
 import { useState, useEffect } from 'react'
 
-const fetchRepoDetails = async (repoUrl) => {
-  const response = await fetch(repoUrl)
-  if (!response.ok) throw new Error('Failed to fetch repository details')
-  return response.json()
-}
-
-const transformPRData = (pr, repoData) => {
-  const description = pr.body?.trim() || ''
-  return {
-    id: pr.id,
-    title: pr.title,
-    repo: repoData.full_name,
-    repoOwner: repoData.owner.login.toLowerCase(),
-    status: pr.pull_request?.merged_at ? 'merged' : pr.state,
-    description,
-    url: pr.html_url,
-    createdAt: pr.created_at,
-    mergedAt: pr.pull_request?.merged_at,
-    updatedAt: pr.updated_at
-  }
-}
+const transformPRData = (pr) => ({
+  id: pr.id,
+  title: pr.title,
+  repo: pr.repository_full_name,
+  repoOwner: pr.repository_owner?.toLowerCase() || '',
+  status: pr.merged ? 'merged' : pr.state,
+  description: pr.description || '',
+  url: pr.html_url,
+  createdAt: pr.created_at,
+  mergedAt: pr.merged_at,
+  updatedAt: pr.updated_at,
+  additions: pr.additions || 0,
+  deletions: pr.deletions || 0,
+  changedFiles: pr.changed_files || 0,
+  commits: pr.commits || 0,
+  comments: pr.comments || 0,
+  labels: pr.labels || [],
+  featured: pr.featured || false,
+  featured_order: pr.featured_order
+})
 
 export const useGithubPRs = () => {
   const [state, setState] = useState({
@@ -32,42 +31,18 @@ export const useGithubPRs = () => {
   useEffect(() => {
     let mounted = true
 
-    const fetchPRs = async () => {
+    const loadPRs = async () => {
       try {
-        const response = await fetch(
-          `https://api.github.com/search/issues?q=author:mehulkchaudhari+is:pr+is:public&per_page=100`
-        )
-        if (!response.ok) throw new Error('Failed to fetch PRs')
+        const response = await fetch('/data/github-prs.json')
+        if (!response.ok) throw new Error('Failed to load PR data')
         const data = await response.json()
-
-        const prsWithRepoDetails = await Promise.all(
-          data.items.map(async (pr) => {
-            try {
-              const repoData = await fetchRepoDetails(pr.repository_url)
-              return transformPRData(pr, repoData)
-            } catch (error) {
-              console.error('Error fetching repo details:', error)
-              return null
-            }
-          })
-        )
 
         if (!mounted) return
 
-        const filteredAndSortedPRs = prsWithRepoDetails
-          .filter(pr => 
-            pr !== null && 
-            (pr.status === 'merged' || pr.status === 'open') &&
-            pr.repoOwner !== 'mehulkchaudhari'
-          )
-          .sort((a, b) => {
-            const dateA = a.mergedAt || a.updatedAt
-            const dateB = b.mergedAt || b.updatedAt
-            return new Date(dateB) - new Date(dateA)
-          })
+        const transformedData = data.map(transformPRData)
 
         setState({
-          contributions: filteredAndSortedPRs,
+          contributions: transformedData,
           isLoading: false,
           error: null
         })
@@ -81,7 +56,7 @@ export const useGithubPRs = () => {
       }
     }
 
-    fetchPRs()
+    loadPRs()
     return () => { mounted = false }
   }, [])
 

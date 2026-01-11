@@ -75,6 +75,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.4.1
         version: 4.5.2(vite@6.3.5(jiti@2.4.2)(lightningcss@1.30.1))
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.6.1
       eslint:
         specifier: ^9.25.0
         version: 9.29.0(jiti@2.4.2)
@@ -1347,6 +1350,10 @@ packages:
 
   dompurify@3.3.1:
     resolution: {integrity: sha512-qkdCKzLNtrgPFP1Vo+98FRzJnBRGe4ffyCea9IwHB1fyxPOeNTHpLKYGd4Uk9xvNoH0ZoOjwZxNptyMwqrId1Q==}
+
+  dotenv@16.6.1:
+    resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
+    engines: {node: '>=12'}
 
   draco3d@1.5.7:
     resolution: {integrity: sha512-m6WCKt/erDXcw+70IJXnG7M3awwQPAsZvJGX5zY7beBqpELw6RDGkYVU0W43AFxye4pDZ5i2Lbyc/NNGqwjUVQ==}
@@ -3863,6 +3870,8 @@ snapshots:
   dompurify@3.3.1:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
+
+  dotenv@16.6.1: {}
 
   draco3d@1.5.7: {}
 

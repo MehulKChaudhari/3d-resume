@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom'
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
 import { GitMergeIcon, GitPullRequestIcon } from '@primer/octicons-react'
-import { topOpenSource } from '../data/openSource'
+import { useGithub } from '../context/GithubContext'
 
 export function OpenSourceSection() {
-  if (topOpenSource.length === 0) {
+  const { contributions, isLoading } = useGithub()
+  
+  const featuredPRs = contributions
+    .filter(pr => pr.featured)
+    .sort((a, b) => (a.featured_order || 999) - (b.featured_order || 999))
+  
+  if (isLoading || featuredPRs.length === 0) {
     return null
   }
 
@@ -18,7 +24,7 @@ export function OpenSourceSection() {
               Source
             </span>
           </h2>
-          <p className="text-sm text-text-subtle">Selected contributions (manually curated)</p>
+          <p className="text-sm text-text-subtle">Selected contributions to open source projects</p>
         </div>
         <Link 
           to="/open-source"
@@ -30,7 +36,7 @@ export function OpenSourceSection() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {topOpenSource.map((pr) => (
+        {featuredPRs.map((pr) => (
           <a
             key={pr.id}
             href={pr.url}
@@ -40,10 +46,15 @@ export function OpenSourceSection() {
           >
             <div className="h-full bg-surface/95 border border-border/80 rounded-2xl p-6 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-lg flex flex-col">
               <div className="h-1 w-full rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-400 to-purple-500 dark:from-purple-500 dark:via-fuchsia-500 dark:to-purple-500 mb-4" />
-              <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-                <div className="flex items-center gap-2 text-sm text-text-muted min-w-0">
-                  <FaGithub className="w-4 h-4 flex-shrink-0" />
-                  <span className="truncate">{pr.repo}</span>
+              
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <div className="flex items-start gap-2.5 min-w-0 flex-1">
+                  <FaGithub className="w-4 h-4 flex-shrink-0 mt-1 text-text-muted" />
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-lg font-semibold text-text group-hover:text-accent transition-colors line-clamp-2">
+                      {pr.title}
+                    </h3>
+                  </div>
                 </div>
                 <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium flex-shrink-0 ${
                   pr.status === 'merged'
@@ -58,10 +69,10 @@ export function OpenSourceSection() {
                   {pr.status}
                 </div>
               </div>
-
-              <h3 className="text-lg font-semibold text-text mb-3 group-hover:text-accent transition-colors line-clamp-2 flex-grow">
-                {pr.title}
-              </h3>
+              
+              <p className="text-xs text-text-subtle mb-3">
+                {pr.repo}
+              </p>
               
               {pr.description && (
                 <p className="text-sm text-text-subtle line-clamp-3 mb-4 flex-grow">
@@ -73,7 +84,7 @@ export function OpenSourceSection() {
 
               <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
                 <span className="text-xs text-text-subtle">
-                  {new Date(pr.date).toLocaleDateString('en-GB', {
+                  {new Date(pr.mergedAt || pr.createdAt).toLocaleDateString('en-GB', {
                     day: 'numeric',
                     month: 'short',
                     year: 'numeric'

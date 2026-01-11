@@ -20,8 +20,8 @@ export function StatsBar() {
     },
     {
       label: 'Open source PRs',
-      value: isLoading ? '—' : totalPRs,
-      hint: isLoading ? 'Fetching GitHub data' : `${mergedPRs} merged`,
+      value: isLoading ? '—' : mergedPRs,
+      hint: isLoading ? 'Fetching GitHub data' : `merged PRs of ${totalPRs} total`,
       gradient: 'from-violet-700 via-fuchsia-600 to-violet-700 dark:from-violet-400 dark:via-fuchsia-300 dark:to-violet-400',
     },
     {

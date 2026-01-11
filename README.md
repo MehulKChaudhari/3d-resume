@@ -1,36 +1,58 @@
-# 3D Resume Portfolio
+# 3D Resume
 
-An interactive 3D resume built with React, Tailwind CSS, and @react-three/fiber.
-
-Clean, minimal, and focused — this project presents my work experience, projects, and skills in a visual and modern format.
-
-## Tech Stack
-
-- React
-- Tailwind CSS
-- @react-three/fiber
-- Vite
-
-## Getting Started
+## Development
 
 ```bash
-git clone https://github.com/MehulKChaudhari/3d-resume.git
-cd 3d-resume
-pnpm install
-pnpm run dev
+npm install
+npm run dev
 ```
 
-## Build
+## Building
 
 ```bash
-pnpm run build
+npm run build
 ```
 
-## Customize
+This will:
+1. Fetch GitHub PR data and save to `public/data/github-prs.json`
+2. Build the site
 
-Update resume data in `src/data/resume.js` and tweak components in `src/components`.
+## GitHub PR Data
 
----
+### Fetching PR Data
 
-Created by [Mehul Chaudhari](https://mehulkc.me)
+```bash
+# Fetch PR data without building
+npm run fetch:github
 
+# Build without fetching (uses existing data)
+npm run build:only
+```
+
+### Setting up GitHub Token
+
+For higher rate limits (5000 req/hour vs 60 req/hour):
+
+```bash
+export GITHUB_TOKEN=your_github_token
+```
+
+### Featuring PRs on Home Page
+
+1. Run `npm run fetch:github` to generate `.github-cache.json`
+2. Edit `.github-cache.json` and set `"featured": true` for PRs you want to showcase
+3. Run `npm run fetch:github` again to update `public/data/github-prs.json`
+
+The script will:
+- Cache all PR data in `.github-cache.json` (gitignored)
+- Only fetch new/updated PRs on subsequent runs
+- Preserve your `featured` flags
+- Handle rate limits automatically (waits when limit is hit)
+- Fetch ALL PRs with details, no matter how many you have
+
+## Project Structure
+
+- `/src/data/` - Static data files
+- `/public/data/` - Generated data (github-prs.json)
+- `/scripts/` - Build-time scripts
+- `.github-cache.json` - PR cache (gitignored, edit this to feature PRs)
