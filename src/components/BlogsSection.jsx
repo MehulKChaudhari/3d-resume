@@ -9,9 +9,6 @@ export const ArticlesSection = memo(function ArticlesSection() {
         <div>
           <h2 className="text-3xl sm:text-4xl font-display font-light text-text mb-2">
             <span className="font-calligraphic font-bold bg-gradient-to-r from-sky-500 via-teal-400 to-indigo-500 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent">
-              Recent
-            </span>{' '}
-            <span className="font-calligraphic font-bold bg-gradient-to-r from-sky-500 via-teal-400 to-indigo-500 dark:from-sky-400 dark:via-teal-300 dark:to-indigo-400 bg-clip-text text-transparent">
               Articles
             </span>
           </h2>

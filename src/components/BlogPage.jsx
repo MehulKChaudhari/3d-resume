@@ -203,7 +203,7 @@ export function ArticlePage() {
               )}
             </header>
 
-            {article.image && (
+            {article.image && article.showCoverImage !== false && (
               <div className="mb-12 -mx-6 sm:-mx-8 lg:-mx-0 overflow-hidden aspect-video sm:aspect-[21/9] bg-surface rounded-2xl shadow-lg">
                 <img
                   src={article.image}

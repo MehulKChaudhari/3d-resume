@@ -48,5 +48,5 @@ export const projectsData = [
   }
 ]
 
-export const curatedProjects = projectsData.slice(0, 1)
+export const curatedProjects = projectsData.filter(project => project.id === 1)
 
