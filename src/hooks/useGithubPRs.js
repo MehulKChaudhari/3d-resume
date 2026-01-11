@@ -30,14 +30,34 @@ export const useGithubPRs = () => {
 
   useEffect(() => {
     let mounted = true
+    let retryCount = 0
+    const maxRetries = 3
 
-    const loadPRs = async () => {
+    const loadPRs = async (retry = 0) => {
       try {
-        const response = await fetch('/data/github-prs.json')
-        if (!response.ok) throw new Error('Failed to load PR data')
+        const url = '/data/github-prs.json'
+        const response = await fetch(url, {
+          headers: {
+            'Accept': 'application/json',
+          },
+          cache: retry > 0 ? 'no-cache' : 'default'
+        })
+        
+        if (!response.ok) {
+          if (response.status === 404 && retry < maxRetries) {
+            setTimeout(() => loadPRs(retry + 1), 1000 * (retry + 1))
+            return
+          }
+          throw new Error(`Failed to load PR data: ${response.status} ${response.statusText}`)
+        }
+        
         const data = await response.json()
 
         if (!mounted) return
+
+        if (!Array.isArray(data)) {
+          throw new Error('Invalid data format: expected array')
+        }
 
         const transformedData = data.map(transformPRData)
 
@@ -48,6 +68,13 @@ export const useGithubPRs = () => {
         })
       } catch (error) {
         if (!mounted) return
+        
+        if (retry < maxRetries && error.message.includes('Failed to fetch')) {
+          setTimeout(() => loadPRs(retry + 1), 1000 * (retry + 1))
+          return
+        }
+        
+        console.error('Error loading GitHub PRs:', error)
         setState(prev => ({
           ...prev,
           error: error.message,

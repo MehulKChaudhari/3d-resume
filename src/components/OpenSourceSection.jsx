@@ -4,13 +4,29 @@ import { GitMergeIcon, GitPullRequestIcon } from '@primer/octicons-react'
 import { useGithub } from '../context/GithubContext'
 
 export function OpenSourceSection() {
-  const { contributions, isLoading } = useGithub()
+  const { contributions, isLoading, error } = useGithub()
   
   const featuredPRs = contributions
     .filter(pr => pr.featured)
     .sort((a, b) => (a.featured_order || 999) - (b.featured_order || 999))
   
-  if (isLoading || featuredPRs.length === 0) {
+  const displayPRs = featuredPRs.length > 0 
+    ? featuredPRs 
+    : contributions
+        .filter(pr => pr.status === 'merged')
+        .sort((a, b) => new Date(b.mergedAt || b.createdAt) - new Date(a.mergedAt || a.createdAt))
+        .slice(0, 3)
+  
+  if (isLoading) {
+    return null
+  }
+  
+  if (error) {
+    console.error('OpenSourceSection error:', error)
+    return null
+  }
+  
+  if (displayPRs.length === 0) {
     return null
   }
 
@@ -36,7 +52,7 @@ export function OpenSourceSection() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featuredPRs.map((pr) => (
+        {displayPRs.map((pr) => (
           <a
             key={pr.id}
             href={pr.url}
