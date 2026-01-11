@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Suspense, lazy } from 'react'
 import { Navbar } from './components/Navbar'
 import { HomePage } from './components/HomePage'
+import { Footer } from './components/Footer'
 import { GithubProvider } from './context/GithubContext'
 import { ThemeProvider } from './context/ThemeContext'
 import './App.css'
@@ -15,19 +16,20 @@ const ArticlePage = lazy(() => import('./components/BlogPage').then(m => ({ defa
 
 const LoadingFallback = () => (
   <div className="min-h-screen flex items-center justify-center">
-    <div className="text-text-subtle">Loading...</div>
-      </div>
-  )
+    <div className="text-text-muted">Loading...</div>
+  </div>
+)
 
 function App() {
   return (
     <Router>
       <ThemeProvider>
       <GithubProvider>
-          <div className="min-h-screen bg-bg text-text transition-colors">
+          <div className="min-h-screen bg-bg text-text transition-colors flex flex-col">
             <Navbar />
+            <div className="flex-1">
               <Suspense fallback={<LoadingFallback />}>
-              <Routes>
+                <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/projects" element={<ProjectsPage />} />
                   <Route path="/projects/:slug" element={<ProjectDetailPage />} />
@@ -35,9 +37,11 @@ function App() {
                   <Route path="/talks" element={<TalksPage />} />
                   <Route path="/articles" element={<ArticlesListPage />} />
                   <Route path="/articles/:slug" element={<ArticlePage />} />
-              </Routes>
+                </Routes>
               </Suspense>
-        </div>
+            </div>
+            <Footer />
+          </div>
       </GithubProvider>
       </ThemeProvider>
     </Router>

@@ -139,8 +139,8 @@ export function OpenSource() {
       
       <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {loading ? (
-          <div className="text-[#fce7fa] text-center col-span-full">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#fce7fa] border-r-transparent motion-reduce:animate-[spin_1.5s_linear_infinite]" />
+          <div className="col-span-full text-center py-12 text-text-muted">
+            Loading...
           </div>
         ) : (
           prs.map((pr, index) => (

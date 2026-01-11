@@ -219,7 +219,7 @@ export function ArticlePage() {
             )}
 
             {!markdownLoaded ? (
-              <div className="text-center py-12 text-text-subtle">Loading content...</div>
+              <div className="text-center py-12 text-text-subtle">Loading...</div>
             ) : markdownComponents ? (
                   <div className="prose prose-lg max-w-none mt-12" ref={mermaidRef}>
                     <markdownComponents.ReactMarkdown

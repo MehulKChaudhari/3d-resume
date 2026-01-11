@@ -4,7 +4,6 @@ import { WorkExperience } from './WorkExperience'
 import { ProjectsSection } from './ProjectsSection'
 import { TalksSection } from './TalksSection'
 import { ArticlesSection } from './BlogsSection'
-import { StatsBar } from './StatsBar'
 
 export function HomePage() {
   return (
@@ -18,7 +17,6 @@ export function HomePage() {
           <ProjectsSection />
           <ArticlesSection />
           <TalksSection />
-          <StatsBar />
         </div>
       </div>
     </main>

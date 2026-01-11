@@ -44,7 +44,7 @@ export function OpenSourcePage() {
         </div>
 
         {isLoading ? (
-          <div className="text-text-subtle text-sm">Loading contributions...</div>
+          <div className="text-center py-12 text-text-muted">Loading...</div>
         ) : contributions.length === 0 ? (
           <div className="text-text-subtle text-sm">No contributions found.</div>
         ) : (
